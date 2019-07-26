@@ -211,10 +211,12 @@ def scale_measurements(res, img_dir, sc_factor):
     return(res)
 
 # define function that creates a datframe based on result dictionaries
-def create_df(res, img_dir, scale):
+def create_df(res, img_dir, scaling=None):
     '''
     This function creates a dataframe based on the multiprocessing output (list of dictionaries).
     '''
+    # define scale
+    scale = scaling
     # if scaling is activated. overwrite results with scaled measurements
     if args.scaleMM:
         res = scale_measurements(res, img_dir, scale)
@@ -318,7 +320,10 @@ def process_directory(d):
 
             # Create Dataframe
             print('Writing dataframe')
-            df = create_df(result, d, sc_factor)
+            if args.scaleMM:
+                df = create_df(result, d, scaling=sc_factor)
+            else:
+                df = create_df(result, d)
            
             # write data frame to csv
             df.to_csv(os.path.join(destination,'measurement_results.')+str(os.path.basename(d))+'.csv', index = False)
