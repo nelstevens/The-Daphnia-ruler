@@ -21,9 +21,6 @@ from tqdm import tqdm
 import argparse
 from pathlib import Path
 
-
-
-
 # define measurement approach by implementing different exceptions
 def measure_except(path):
     '''
