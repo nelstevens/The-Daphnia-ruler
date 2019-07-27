@@ -13,7 +13,7 @@ import os
 import json
 import cv2
 import sys
-import measurement_methods_mp
+import measurement_methods
 import imghdr
 import pandas as pd
 from multiprocessing import Pool, cpu_count
@@ -29,30 +29,30 @@ def measure_except(path):
     '''
     if args.eyeMethod:
         try:
-            res = measurement_methods_mp.eye_method_2(path)
+            res = measurement_methods.eye_method_2(path)
             return(res)
 
         except IndexError as a:
             try:
-                res2 = measurement_methods_mp.head_method(path)
+                res2 = measurement_methods.head_method(path)
                 return(res2)
 
             except IndexError as e:
                 pass
         except ValueError as a:
             try:
-                res2 = measurement_methods_mp.head_method(path)
+                res2 = measurement_methods.head_method(path)
                 return(res2)
 
             except IndexError as e:
                 pass
 
         except ZeroDivisionError as z:
-            res2 = measurement_methods_mp.head_method(path)
+            res2 = measurement_methods.head_method(path)
             return(res2)
     else:
          try:
-            res2 = measurement_methods_mp.head_method(path)
+            res2 = measurement_methods.head_method(path)
             return(res2)
 
          except IndexError as e:
