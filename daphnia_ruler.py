@@ -93,19 +93,19 @@ def check_scale(path):
         if 'Scale.txt' not in files:
             missing_dir.append(path)
     # if file is present check if it's a number
-    if 'Scale.txt' in files:
-        json_file = open(os.path.join(path, 'Scale.txt'), 'r', encoding ='utf-8')
-        try:
-            Scale = json.load(json_file)
-            json_file.close()
-            sc_factor = Scale['PixelperMM']
-        except json.decoder.JSONDecodeError:
-            print("\n %s cannot be read properly. Please make sure you enter a number or float!" % os.path.join(path, 'Scale.txt'))
-            sys.exit(0)
+        else:
+            json_file = open(os.path.join(path, 'Scale.txt'), 'r', encoding ='utf-8')
+            try:
+                Scale = json.load(json_file)
+                json_file.close()
+                sc_factor = Scale['PixelperMM']
+            except json.decoder.JSONDecodeError:
+                print("\n %s cannot be read properly. Please make sure you enter a number or float!" % os.path.join(path, 'Scale.txt'))
+                sys.exit(0)
 
-        # check if scaling factor is accepted data type
-        if not isinstance(sc_factor, (int, float)):
-            nt_nr.append(os.path.join(path, 'Scale.txt'))
+            # check if scaling factor is accepted data type
+            if not isinstance(sc_factor, (int, float)):
+                nt_nr.append(os.path.join(path, 'Scale.txt'))
 
     # now check subdirectories
     for root, dirs, files in os.walk(path):
