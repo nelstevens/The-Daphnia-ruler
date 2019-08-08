@@ -9,20 +9,11 @@ import os
 import cv2
 import numpy as np
 import sys
-import glob
-import datetime
-import pickle
-import random, string
 from math import pi
-from skimage import morphology, measure, exposure, restoration
-from skimage import transform
-from skimage.feature import register_translation
-from skimage.filters import threshold_otsu, scharr, gaussian
-from scipy import ndimage, spatial
+from skimage import morphology, measure
+from skimage.filters import scharr
+from scipy import ndimage
 import math
-import matplotlib.pyplot as plt
-import scipy.ndimage as ndi
-from skimage.morphology.convex_hull import convex_hull_image
 import copy
 import warnings
 
