@@ -1,18 +1,18 @@
 # The-Daphnia-ruler
-Automatically collect morphometric traits of Daphnia
+Automatically collect morphometric traits of Daphnia.
 
 ![](images/final_product_fin.jpg)
 ## Overview
-The Daphnia ruler is a set of python scripts that can measure morphometric traits of Daphnia
-from images taken under a microscope. The following traits are measured:
-* body size: measured from the center of the eye to the base of the tail
-* body size: approximated by fitting an ellipse around the Daphnia body
-* tail length
+The Daphnia ruler is a command line program that can measure morphometric traits of Daphnia from images taken under a microscope. 
+The Daphnia ruler works in both windows and linux and can measure the following traits:
+* body size: measured from the center of the eye to the base of the tail (red line in image)
+* body size: approximated by fitting an ellipse around the Daphnia body (green line in image)
+* tail length (blue line in image)
 * tail angle
-* body area
-* body perimeter
-* body width
-* solidity
+* body area (area within red outline in image)
+* body perimeter (length of red outline in image)
+* body width (purple line in image)
+
 
 ## Installation
 The fastest way to get your system setup is to make sure you've installed python 3 (https://www.python.org/) and clone this repository to your local drive.
@@ -29,35 +29,19 @@ pip install scikit-image
 pip install pandas
 pip install tqdm
 ```
-## Quickstart
-The fastest way to get your system setup is to install Anaconda 
-and then add the opencv3 module through conda:
+## Usage
+For detailed information on how to use the Daphnia ruler see ???.
 
-1. Install Anaconda for python 2.7 from https://anaconda.org/
-2. Open a terminal and install the required python module: 
-* $ conda install -c menpo opencv3
-* $ conda install scipy
-3. Place both measurement_methods.py and daily_measurement.py in a directory that contains subfolder(s)
-with the original images.
-4. Make sure the names of folders containing images start with: daphnia_images
-5. Open a terminal and navigate to the directory containing both python scripts
-6. Run this command: $ python measure_daphnia.py
+usage: ./daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
 
-The program will now create subdirectories within image folders, containing a copy of each image with
-measurements overplotted. Additionaly there will be a .txt file containing all measurements in pixel.
-
-## Requirements
-* Python2.7, numpy, scipy, skimage, opencv3
-* tested only on windows (thus far)
-
-## Detailed desription
-The Daphnia ruler is designed to measure morphological features of Daphnia from images taken under
-a microscope. Although the Daphnia ruler can handle some noise in the image, it is crucial to
-minimize background noise (scratches on microscope slide etc.). In rare cases the body size measurement
-from the center of the eye to the base of the tail fails, and tail length fails.
-In such cases the corresponding fields in the text file contain NA's. Each row in the text file will
-start with an image ID, which corresponds to the name of the image file. Output images with features
-overplotted are in .png format.
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  Path to your input directory. The program is able to
+                        loop through subdirectories of the input.
+  -n, --noImages        Don't write images with results overplotted.
+  -e, --eyeMethod       Implement eye method on top of ellipse method.
+  -s, --scaleMM         Scale measurement to mm. For more information see
+                        README.md
 
 ## Author
 * Nelson Stevens
