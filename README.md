@@ -32,6 +32,7 @@ pip install tqdm
 ## Usage
 For detailed information on how to use the Daphnia ruler see ???.
 
+```bash
 usage: ./daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
 
 optional arguments:
@@ -42,6 +43,7 @@ optional arguments:
   -e, --eyeMethod       Implement eye method on top of ellipse method.
   -s, --scaleMM         Scale measurement to mm. For more information see
                         README.md
+```
 
 ## Author
 * Nelson Stevens
