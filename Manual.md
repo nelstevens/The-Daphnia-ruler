@@ -12,6 +12,7 @@ used to collect data for other zooplankton species.
 
 ### 1a. Measured traits
 ![](images/final_product_fin.jpg)
+
 The following traits can be measured in all zooplankton species:
 * body size: approximated by fitting an ellipse around the Daphnia body 
 (green line)
@@ -56,11 +57,13 @@ Example:
 python daphnia_ruler.py -p C:\Users\'Username'\input_directory
 ```
 This command specified 'input_directory' as the input for the daphnia ruler.
+
 **The input directory:**
 The input directory can either be a directory containing images or a
 directory containing subdirectories which contain images. Thus the daphnia
 ruler will analyze all images in both the input directory and all its 
 subdirectories.
+
 **Images in input directory:**
 
 
