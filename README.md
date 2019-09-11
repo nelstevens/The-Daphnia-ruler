@@ -22,7 +22,13 @@ Once complete use the package manager pip to install the necessary dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
+Users who wish to install dependencies manually run:
+```bash
+pip install opencv-python
+pip install scikit-image
+pip install pandas
+pip install tqdm
+```
 ## Quickstart
 The fastest way to get your system setup is to install Anaconda 
 and then add the opencv3 module through conda:
