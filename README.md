@@ -14,6 +14,14 @@ from images taken under a microscope. The following traits are measured:
 * body width
 * solidity
 
+## Installation
+The fastest way to get your system setup is to make sure you've installed python 3 (https://www.python.org/) and clone this repository to your local drive.
+Once complete use the package manager pip to install the necessary dependencies:
+1. Open your command prompt and navigate to the cloned directory
+2. Run this command: 
+```bash
+pip install -r requirements.txt
+```
 
 ## Quickstart
 The fastest way to get your system setup is to install Anaconda 
