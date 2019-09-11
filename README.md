@@ -30,10 +30,10 @@ pip install pandas
 pip install tqdm
 ```
 ## Usage
-For detailed information on how to use the Daphnia ruler see ???.
+For detailed information on how to use the Daphnia ruler see Manual.md.
 
 ```bash
-usage: ./daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
+usage: python daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -42,7 +42,7 @@ optional arguments:
   -n, --noImages        Don't write images with results overplotted.
   -e, --eyeMethod       Implement eye method on top of ellipse method.
   -s, --scaleMM         Scale measurement to mm. For more information see
-                        README.md
+                        Manual.md.
 ```
 
 ## Author
