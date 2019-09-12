@@ -1,7 +1,10 @@
 # The-Daphnia-ruler manual
 ## Contents
 1. Introduction
+	1a. Measured traits
 2. Usage
+	2a. The help menu
+	2b. Input
 ## 1. Introduction
 The Daphnia ruler is a command line program that allows the collection of 
 morphometric data of zooplankton from still images. It was specifically
@@ -66,4 +69,29 @@ subdirectories.
 
 **Images in input directory:**
 
+**What image formats are accepted:**
 
+A variaty of image formats are accepted by the daphnia ruler including jpeg, png,
+and tiff. 
+
+**What should an image look like:**
+The image should preferably only contain a single zooplankton individual.
+However, the daphnia ruler will collect morphometric data of the largest object
+in the image. Thus it is possible to have smaller objects in the image as well
+which will be ignored by the daphnia ruler. Note however, that objects should
+not touch each other.
+The daphnia ruler relies on edge detection algorithms. Even though these can
+handle a certain amount of noise in the the image it is important to have 
+a clear separation of the zooplankton indivdual and the background. A good 
+way to achieve this is to photograph individuals on clean microscope slides.
+As mentioned in the introduction additional features can be measured for 
+Daphnia. In order to do so it is crucial that images are taken by means
+of bright field photography.
+
+### 2c. Output
+The daphnia ruler will create a subfolder in each directory specified
+by the input path that contains images. These subfolders will contain
+a copy of each image with results overplotted (unless argument -n is 
+active; see 2....). This new subfolder will also include a single 
+csv file containing all measurements for each image in the original
+directory.
