@@ -137,7 +137,7 @@ def check_scale(path):
                     # check if scaling factor is accepted data type
                     if not isinstance(sc_factor, (int, float)):
                         nt_nr.append(os.path.join(dir_path, 'Scale.txt'))
-    
+
     #if scaling files are missing ask if user wants to continue
     if len(missing_dir) > 0:
         print("You didn't provide scaling files in the following directories: \n")
@@ -170,7 +170,7 @@ def check_scale(path):
                 print('Please enter y or n')
 
 
-        
+
 
 
 # define function that scales results to mm
@@ -217,45 +217,42 @@ def create_df(res, img_dir, scaling=None):
     # if scaling is activated. overwrite results with scaled measurements
     if args.scaleMM:
         res = scale_measurements(res, img_dir, scale)
-        
+
 
     # if eye method is activated provide column for it
     if args.eyeMethod:
-            df = pd.DataFrame(columns = ['ID', 'eye.Length', 'tail.Length',
-            'perimeter', 'area', 'minor', 'solidity', 'head.Length', 'tail.Angle'])
+            df = pd.DataFrame(columns = ['ID', 'body.Length.h','body.Length.e', 'tail.Length',
+            'body.Perimeter', 'body.Area', 'body.Width', 'solidity', 'tail.Angle'])
             # loop through results and append to dataframe
             for di in tqdm(res):
                 try:
-                    df = df.append({'ID': di['ID'], 'eye.Length': di['eye.Length'],
-                    'tail.Length': di['tail.Length'], 'perimeter': di['perimeter'],
-                    'area': di['area'], 'minor': di['minor'],
-                    'solidity': di['solidity'], 'head.Length': di['full.Length'],
-                    'tail.Angle': di['tail.angle']}, ignore_index=True)
+                    df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
+                    'body.Length.e': di['eye.Length'],
+                    'tail.Length': di['tail.Length'], 'body.Perimeter': di['perimeter'],
+                    'body.Area': di['area'], 'body.Width': di['minor'],
+                    'solidity': di['solidity'], 'tail.Angle': di['tail.angle']}, ignore_index=True)
                 # if Landmark method failed
                 except KeyError:
-                        df = df.append({'ID': di['ID'],
-                        'perimeter': di['perimeter'],
-                        'area': di['area'], 'minor': di['minor'],
-                        'solidity': di['solidity'], 'head.Length': di['full.Length']},
-                        ignore_index=True).fillna('NA')
+                        df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
+                        'body.Perimeter': di['perimeter'],
+                        'body.Area': di['area'], 'body.Width': di['minor'],
+                        'solidity': di['solidity']}, ignore_index=True).fillna('NA')
                 # if everything failed
                 except TypeError:
                     pass
     else:
-        df = pd.DataFrame(columns = ['ID', 'perimeter', 'area', 'minor', 
-        'solidity', 'head.Length'])
+        df = pd.DataFrame(columns = ['ID', 'body.Length.h', 'body.Perimeter',
+        'body.Area', 'body.Width', 'solidity'])
         for di in tqdm(res):
                 try:
-                        df = df.append({'ID': di['ID'],
-                        'perimeter': di['perimeter'],
-                        'area': di['area'], 'minor': di['minor'],
-                        'solidity': di['solidity'], 'head.Length': di['full.Length']},
-                        ignore_index=True).fillna('NA')
+                        df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
+                        'body.Perimeter': di['perimeter'],
+                        'body.Area': di['area'], 'body.Width': di['minor'],
+                        'solidity': di['solidity']}, ignore_index=True).fillna('NA')
                 # if everything failed
                 except TypeError:
                     pass
     return(df)
-    
 
 #define a function that analyses a directory
 def process_directory(d):
@@ -265,7 +262,7 @@ def process_directory(d):
     if not d.endswith('results'):
         # create list of image files
         files = os.listdir(d)
-        
+
         #filter files for images
         filtered_files = []
         for k in files:
@@ -279,7 +276,7 @@ def process_directory(d):
             if 'Scale.txt' not in files:
                 print('You did not provide a scaling file in directory: %s ... skipping directory!' % d)
                 return
-        
+
             else:
                 json_file = open(os.path.join(d, 'Scale.txt'), 'r', encoding ='utf-8')
 
@@ -291,7 +288,7 @@ def process_directory(d):
                 if not isinstance(sc_factor, (int, float)):
                     print('%s/Scaling.txt did not provide a number... skipping' % d)
                     return
-        
+
         # overwrite files with only images
         files = filtered_files
 
@@ -321,7 +318,7 @@ def process_directory(d):
                 df = create_df(result, d, scaling=sc_factor)
             else:
                 df = create_df(result, d)
-           
+
             # write data frame to csv
             df.to_csv(os.path.join(destination,'measurement_results.')+str(os.path.basename(d))+'.csv', index = False)
 
@@ -360,7 +357,7 @@ if __name__ == '__main__':
     #if scaling is active check for scaling files. If missing user is asked if he wants to continue
     if args.scaleMM:
         check_scale(source)
-    
+
     #if source directory contains images, prcess them
     process_directory(source)
 
