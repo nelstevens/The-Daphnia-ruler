@@ -175,7 +175,10 @@ def check_scale(path):
 
 # define function that scales results to mm
 def scale_measurements(res, img_dir, sc_factor):
-
+    '''
+    This function uses the scaling factor from Scale.txt to convert 
+    measurements from pixels to mm.
+    '''
     # scale measurements
     for inst in res:
         # if eye method is activate scale all variables
