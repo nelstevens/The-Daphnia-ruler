@@ -358,7 +358,8 @@ if __name__ == '__main__':
     source = is_dir(args.path)
 
     #if scaling is active check for scaling files. If missing user is asked if he wants to continue
-    check_scale(source)
+    if args.scaleMM:
+        check_scale(source)
     
     #if source directory contains images, prcess them
     process_directory(source)
