@@ -89,9 +89,10 @@ Daphnia. In order to do so it is crucial that images are taken by means
 of bright field photography.
 
 ### 2c. Output
-The daphnia ruler will create a subfolder in each directory specified
-by the input path that contains images. These subfolders will contain
-a copy of each image with results overplotted (unless argument -n is 
+The daphnia ruler will create a subfolder in each directory of the input 
+that contains images. These subfolders will be named results and contain 
+a copy of each image 
+with results overplotted (unless argument -n is 
 active; see 2....). This new subfolder will also include a single 
 csv file containing all measurements for each image in the original
 directory.
