@@ -5,7 +5,7 @@ Created on Mon Oct  8 19:28:26 2018
 
 @author: Nelson
 """
-a
+
 
 #load libraries
 import time
