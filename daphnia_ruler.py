@@ -5,7 +5,7 @@ Created on Mon Oct  8 19:28:26 2018
 
 @author: Nelson
 """
-
+a
 
 #load libraries
 import time
@@ -168,10 +168,6 @@ def check_scale(path):
                 return
             else:
                 print('Please enter y or n')
-
-
-
-
 
 # define function that scales results to mm
 def scale_measurements(res, img_dir, sc_factor):
