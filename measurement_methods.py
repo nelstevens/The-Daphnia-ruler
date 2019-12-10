@@ -32,6 +32,9 @@ def head_method(image):
         and the area of the convex hull
         output['full.Length'] = major axis length of the fitted elipse
         output['image'] = imgage with plotted size estimate'''
+    # create empty output list
+    out = []
+    
     # Load in rayscale, resize
     img = cv2.imread(image)
     # save aspect ratio
@@ -155,22 +158,26 @@ def head_method(image):
         major = major/scf
 
     
-    # create dictionary with results
-    res = {}
-    res['ID'] = ID
-    res['perimeter'] = perimeter
-    res['area'] = area
-    res['minor'] = minor
-    res['solidity'] = solidity
-    res['full.Length'] = major
-    res['image'] = img
+        # create dictionary with results
+        res = {}
+        res['ID'] = ID
+        res['perimeter'] = perimeter
+        res['area'] = area
+        res['minor'] = minor
+        res['solidity'] = solidity
+        res['full.Length'] = major
+        res['image'] = img
+        # append res to output list
+        out.append(res)
+
 
     # return results
-    return(res)
+    return(out)
 
 # if called directly show image output of all three methods
 if __name__ == '__main__':
     res1 = head_method(sys.argv[1])
-    cv2.imshow('head method', res1['image'])
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('head method', res1['image'])
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    print(res1[0])

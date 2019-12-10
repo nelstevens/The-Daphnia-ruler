@@ -223,26 +223,28 @@ def create_df(res, img_dir, scaling=None):
             df = pd.DataFrame(columns = ['ID', 'body.Length.h','body.Length.e', 'tail.Length',
             'body.Perimeter', 'body.Area', 'body.Width', 'solidity', 'tail.Angle'])
             # loop through results and append to dataframe
-            for di in tqdm(res):
-                try:
-                    df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
-                    'body.Length.e': di['eye.Length'],
-                    'tail.Length': di['tail.Length'], 'body.Perimeter': di['perimeter'],
-                    'body.Area': di['area'], 'body.Width': di['minor'],
-                    'solidity': di['solidity'], 'tail.Angle': di['tail.angle']}, ignore_index=True)
-                # if Landmark method failed
-                except KeyError:
+            for lst in tqdm(res):
+                for di in lst:
+                    try:
                         df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
-                        'body.Perimeter': di['perimeter'],
+                        'body.Length.e': di['eye.Length'],
+                        'tail.Length': di['tail.Length'], 'body.Perimeter': di['perimeter'],
                         'body.Area': di['area'], 'body.Width': di['minor'],
-                        'solidity': di['solidity']}, ignore_index=True).fillna('NA')
-                # if everything failed
-                except TypeError:
-                    pass
+                        'solidity': di['solidity'], 'tail.Angle': di['tail.angle']}, ignore_index=True)
+                    # if Landmark method failed
+                    except KeyError:
+                            df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
+                            'body.Perimeter': di['perimeter'],
+                            'body.Area': di['area'], 'body.Width': di['minor'],
+                            'solidity': di['solidity']}, ignore_index=True).fillna('NA')
+                    # if everything failed
+                    except TypeError:
+                        pass
     else:
         df = pd.DataFrame(columns = ['ID', 'body.Length.h', 'body.Perimeter',
         'body.Area', 'body.Width', 'solidity'])
-        for di in tqdm(res):
+        for lst in tqdm(res):
+            for di in lst:
                 try:
                         df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
                         'body.Perimeter': di['perimeter'],
