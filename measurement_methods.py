@@ -168,3 +168,9 @@ def head_method(image):
     # return results
     return(res)
 
+# if called directly show image output of all three methods
+if __name__ == '__main__':
+    res1 = head_method(sys.argv[1])
+    cv2.imshow('head method', res1['image'])
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
