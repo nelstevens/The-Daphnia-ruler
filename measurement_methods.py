@@ -79,6 +79,9 @@ def head_method(image):
         kernel_size += 1
     '''
     for i in range(len(props)):
+        ## add size subset here with an if statement!!
+
+
         # plot binary image
         bw_img = 0*edges_res
         bw_img = (label_img) == props[i].label
