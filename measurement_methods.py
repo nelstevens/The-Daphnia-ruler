@@ -18,7 +18,7 @@ import copy
 import warnings
 
 # create function that does not require landmarks
-def head_method(image):
+def head_method(image, res_destination):
     ''' This method calculates the Length of the major axis of a fitted ellipse
     around the binary mask of the daphnia
     input:
@@ -170,13 +170,13 @@ def head_method(image):
         # append res to output list
         out.append(res)
 
-
+    cv2.imwrite(os.path.join(res_destination, 'image.jpg'), img)
     # return results
     return(out)
 
 # if called directly show image output of all three methods
 if __name__ == '__main__':
-    res1 = head_method(sys.argv[1])
+    #res1 = head_method(sys.argv[1])
     # cv2.imshow('head method', res1['image'])
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()

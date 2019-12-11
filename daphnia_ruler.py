@@ -20,9 +20,10 @@ from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 import argparse
 from pathlib import Path
+from functools import partial
 
 # define measurement approach by implementing different exceptions
-def measure_except(path):
+def measure_except(path, res_destination):
     '''
     This method deals with the appropriate exceptions that need to be
     handled when measuring several daphnia
@@ -52,7 +53,7 @@ def measure_except(path):
             return(res2)
     else:
          try:
-            res2 = measurement_methods.head_method(path)
+            res2 = measurement_methods.head_method(path, res_destination)
             return(res2)
 
          except IndexError as e:
@@ -308,8 +309,9 @@ def process_directory(d):
             # Create a pool of workers (multiprocessing)
             p = Pool(processes = cpu_count() - 1)
 
+            msr = partial(measure_except, res_destination = destination)
             # split work on workers and implement progress bar
-            result = list(tqdm(p.imap(measure_except, files), total = len(files)))
+            result = list(tqdm(p.imap(msr, files), total = len(files)))
             p.close()
             p.join()
 
@@ -324,12 +326,12 @@ def process_directory(d):
             df.to_csv(os.path.join(destination,'measurement_results.')+str(os.path.basename(d))+'.csv', index = False)
 
             # if no -n flag is set write images with measurement overplotted
-            if not args.noImages:
-                print('writing processed images')
-                # loop over results and implement progress bar
-                for di in tqdm(result):
-                    ID = os.path.basename(di['ID'])+'_processed.png'
-                    cv2.imwrite(os.path.join(destination, ID), di['image'])
+            # if not args.noImages:
+            #     print('writing processed images')
+            #     # loop over results and implement progress bar
+            #     for di in tqdm(result):
+            #         ID = os.path.basename(di['ID'])+'_processed.png'
+            #         cv2.imwrite(os.path.join(destination, ID), di['image'])
             # print total elapsed time for directory d
             print('total elapsed time (s): ' + str(time.time()-start))
 
