@@ -169,8 +169,8 @@ def head_method(image, res_destination):
         res['image'] = img
         # append res to output list
         out.append(res)
-
-    cv2.imwrite(os.path.join(res_destination, 'image.jpg'), img)
+        
+    cv2.imwrite(os.path.join(res_destination, os.path.basename(image)) + '.png', img)
     # return results
     return(out)
 
