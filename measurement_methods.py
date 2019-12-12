@@ -110,6 +110,8 @@ def head_method(image, res_destination):
         x1 = props[i].centroid[0]-dx
         y1 = props[i].centroid[1]+dy
 
+        #print particle id at number start
+        cv2.putText(img, str(i), (int(y1), int(x1)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
         # get end
         x2 = props[i].centroid[0]+dx
         y2 = props[i].centroid[1]-dy
@@ -169,7 +171,7 @@ def head_method(image, res_destination):
         res['image'] = img
         # append res to output list
         out.append(res)
-        
+
     cv2.imwrite(os.path.join(res_destination, os.path.basename(image)) + '.png', img)
     # return results
     return(out)
