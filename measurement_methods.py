@@ -56,8 +56,8 @@ def head_method(image):
     edges = morphology.erosion(edges, morphology.square(3))
 
     # label imageregions and calculate properties
-    label_img = morphology.label(edges, neighbors=8, background=0)
-    props = measure.regionprops(label_img, gray, coordinates = 'xy')
+    label_img = morphology.label(edges, connectivity=2, background=0)
+    props = measure.regionprops(label_img, gray)
     props = sorted(props, reverse=True, key=lambda k: k.area)
 
     ## erode the mask
@@ -72,8 +72,8 @@ def head_method(image):
         edges_res = cv2.morphologyEx(edges_res, cv2.MORPH_OPEN, kernel, iterations = 1)
 
         # label imageregions and calculate properties
-        label_img = morphology.label(edges_res, neighbors=8, background=0)
-        props = measure.regionprops(label_img, gray, coordinates = 'xy')
+        label_img = morphology.label(edges_res, connectivity=2, background=0)
+        props = measure.regionprops(label_img, gray)
         props = sorted(props, reverse=True, key=lambda k: k.area)
         kernel_size += 1
 
@@ -95,8 +95,8 @@ def head_method(image):
 
     # # plot major axis of fitted elipse
     # get deltas
-    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation)
-    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation)
+    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
+    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
 
     # get start
     x1 = props[0].centroid[0]-dx
@@ -111,8 +111,8 @@ def head_method(image):
 
     # # plot minor axis of fitted elipse
     # get deltas
-    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
-    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
+    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation)
+    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation)
 
     # get start
     x1 = props[0].centroid[0]-dx
@@ -210,8 +210,8 @@ def eye_method(image):
 
 
     # label imageregions and calculate properties
-    label_img = morphology.label(edges, neighbors=8, background=0)
-    props = measure.regionprops(label_img, gray, coordinates = 'xy')
+    label_img = morphology.label(edges, connectivity=2, background=0)
+    props = measure.regionprops(label_img, gray)
     props = sorted(props, reverse=True, key=lambda k: k.area)
 
     # define uneroded binary image
@@ -233,8 +233,8 @@ def eye_method(image):
         edges_res = cv2.morphologyEx(edges_res, cv2.MORPH_OPEN, kernel, iterations = 1)
 
         # label imageregions and calculate properties
-        label_img = morphology.label(edges_res, neighbors=8, background=0)
-        props = measure.regionprops(label_img, gray, coordinates = 'xy')
+        label_img = morphology.label(edges_res, connectivity=2, background=0)
+        props = measure.regionprops(label_img, gray)
         props = sorted(props, reverse=True, key=lambda k: k.area)
         kernel_size += 1
 
@@ -492,8 +492,8 @@ def eye_method_2(image):
 
 
     # label imageregions and calculate properties
-    label_img = morphology.label(edges, neighbors=8, background=0)
-    props = measure.regionprops(label_img, gray, coordinates = 'xy')
+    label_img = morphology.label(edges, connectivity=2, background=0)
+    props = measure.regionprops(label_img, gray)
     props = sorted(props, reverse=True, key=lambda k: k.area)
 
     # define uneroded binary image
@@ -515,8 +515,8 @@ def eye_method_2(image):
         edges_res = cv2.morphologyEx(edges_res, cv2.MORPH_OPEN, kernel, iterations = 1)
 
         # label imageregions and calculate properties
-        label_img = morphology.label(edges_res, neighbors=8, background=0)
-        props = measure.regionprops(label_img, gray, coordinates = 'xy')
+        label_img = morphology.label(edges_res, connectivity=2, background=0)
+        props = measure.regionprops(label_img, gray)
         props = sorted(props, reverse=True, key=lambda k: k.area)
         kernel_size += 1
 
@@ -670,8 +670,8 @@ def eye_method_2(image):
     dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation)
 
     # get start
-    x1 = props[0].centroid[0]-dx
-    y1 = props[0].centroid[1]+dy
+    x1 = props[0].centroid[1]-dx
+    y1 = props[0].centroid[0]+dy
 
     # get end
     x2 = props[0].centroid[0]+dx
