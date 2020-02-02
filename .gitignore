@@ -1,4 +1,4 @@
 daph_ruler_env
 .vscode
-_pycache__
+.pyc
 newsci_env
