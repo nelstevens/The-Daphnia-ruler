@@ -91,8 +91,8 @@ def head_method(image):
     # plot elipse on image
     cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),
                 (int(props[0].major_axis_length/2), int(props[0].minor_axis_length/2)),
-                -props[0].orientation*180/pi, 0, 360, 0, 0)
-
+                (-props[0].orientation*180/pi+90), 0, 360, 0, 0)
+    
     # # plot major axis of fitted elipse
     # get deltas
     dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
