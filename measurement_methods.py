@@ -52,7 +52,7 @@ def head_method(image, res_destination):
     # create mask
     edges_mag = scharr(gray)
     edges_med = np.median(edges_mag)
-    edges_thresh = 5.5*edges_med
+    edges_thresh = 3.5*edges_med
     edges = edges_mag >= edges_thresh
     #edges = morphology.closing(edges, morphology.square(3))
     edges = ndimage.binary_fill_holes(edges)
@@ -169,6 +169,7 @@ def head_method(image, res_destination):
         res['solidity'] = solidity
         res['full.Length'] = major
         res['image'] = img
+        res['particle_id'] = i
         # append res to output list
         out.append(res)
 

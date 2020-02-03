@@ -242,12 +242,12 @@ def create_df(res, img_dir, scaling=None):
                     except TypeError:
                         pass
     else:
-        df = pd.DataFrame(columns = ['ID', 'body.Length.h', 'body.Perimeter',
+        df = pd.DataFrame(columns = ['ID', 'particle_id','body.Length.h', 'body.Perimeter',
         'body.Area', 'body.Width', 'solidity'])
         for lst in tqdm(res):
             for di in lst:
                 try:
-                        df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
+                        df = df.append({'ID': di['ID'], 'particle_id': di['particle_id'],'body.Length.h': di['full.Length'],
                         'body.Perimeter': di['perimeter'],
                         'body.Area': di['area'], 'body.Width': di['minor'],
                         'solidity': di['solidity']}, ignore_index=True).fillna('NA')
