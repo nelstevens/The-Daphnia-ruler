@@ -374,12 +374,12 @@ def eye_method(image):
     # plot elipse on image
     cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),
                 (int(props[0].major_axis_length/2), int(props[0].minor_axis_length/2)),
-                -props[0].orientation*180/pi,0,360,0,0)
+                (-props[0].orientation*180/pi+90), 0, 360, 0, 0)
 
     # # plot major axis of fitted elipse
     # get deltas
-    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation)
-    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation)
+    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
+    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
 
     #  get start
     x1 = props[0].centroid[0]-dx
@@ -394,8 +394,8 @@ def eye_method(image):
 
     # # plot minor axis of fitted elipse
     # get deltas
-    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
-    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
+    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation)
+    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation)
 
     # get start
     x1 = props[0].centroid[0]-dx
@@ -662,16 +662,16 @@ def eye_method_2(image):
     # plot elipse on image
     cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),
                 (int(props[0].major_axis_length/2), int(props[0].minor_axis_length/2)),
-                -props[0].orientation*180/pi,0, 360, 0, 0)
+                (-props[0].orientation*180/pi+90), 0, 360, 0, 0)
 
     # # plot major axis of fitted elipse
     # get deltas
-    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation)
-    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation)
+    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
+    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
 
     # get start
-    x1 = props[0].centroid[1]-dx
-    y1 = props[0].centroid[0]+dy
+    x1 = props[0].centroid[0]-dx
+    y1 = props[0].centroid[1]+dy
 
     # get end
     x2 = props[0].centroid[0]+dx
@@ -682,8 +682,8 @@ def eye_method_2(image):
 
     # # plot minor axis of fitted elipse
     # get deltas
-    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
-    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
+    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation)
+    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation)
 
     # get start
     x1 = props[0].centroid[0]-dx
