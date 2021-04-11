@@ -16,6 +16,7 @@ from scipy import ndimage
 import math
 import copy
 import warnings
+import utils
 
 # create function that does not require landmarks
 def head_method(image):
@@ -32,6 +33,7 @@ def head_method(image):
         and the area of the convex hull
         output['full.Length'] = major axis length of the fitted elipse
         output['image'] = imgage with plotted size estimate'''
+    '''
     # Load in rayscale, resize
     img = cv2.imread(image)
     # save aspect ratio
@@ -45,6 +47,16 @@ def head_method(image):
 
     # grayscale image
     gray = np.uint8(np.mean(img, 2))
+    '''
+    # import and resize
+    img = utils.import_image(image)
+
+    # grayscale
+    gray = utils.grayscale_image(img)
+
+    # export width, height and scaling factor
+    height, width = np.shape(img)[0:2]
+    scf = 720/width
 
     # create mask
     edges_mag = scharr(gray)
