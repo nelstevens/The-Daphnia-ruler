@@ -10,6 +10,7 @@ from scipy import ndimage
 import math
 import copy
 import warnings
+
 # Create function to load image in proper format
 def import_image(image):
     '''
@@ -37,5 +38,6 @@ def import_image(image):
     res["height"] = height
     res["width"] = width
     res["scf"] = scf
+
     # export image
     return(res)
