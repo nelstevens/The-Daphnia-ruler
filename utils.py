@@ -35,8 +35,6 @@ def import_image(image):
     res = {}
     res["img"] = img
     res["gray"] = gray
-    res["height"] = height
-    res["width"] = width
     res["scf"] = scf
 
     # export image

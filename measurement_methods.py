@@ -54,8 +54,6 @@ def head_method(image):
     # define output into different variables
     img = img_res["img"]
     gray = img_res["gray"]
-    height = img_res["height"]
-    width = img_res["width"]
     scf = img_res["scf"]
 
     # create mask
