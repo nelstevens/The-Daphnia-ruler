@@ -13,7 +13,8 @@ import warnings
 # Create function to load image in proper format
 def import_image(image):
     '''
-    imports and resizes image
+    imports, resizes and grayscales image.
+     returns additional info on image.
     '''
     # Load in rayscale, resize
     img = cv2.imread(image)
@@ -26,16 +27,15 @@ def import_image(image):
     nheight = int(height * scf)
     img = cv2.resize(img, (nwidth, nheight))
 
-    # export image
-    return(img)
-
-# write function to grayscale image
-def grayscale_image(img):
-    '''
-    exports image to grayscale
-    '''
     # grayscale image
     gray = np.uint8(np.mean(img, 2))
 
-    # export grayscale
-    return(gray)
+    # create dictionary with results
+    res = {}
+    res["img"] = img
+    res["gray"] = gray
+    res["height"] = height
+    res["width"] = width
+    res["scf"] = scf
+    # export image
+    return(res)

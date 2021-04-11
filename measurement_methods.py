@@ -49,14 +49,14 @@ def head_method(image):
     gray = np.uint8(np.mean(img, 2))
     '''
     # import and resize
-    img = utils.import_image(image)
+    img_res = utils.import_image(image)
 
-    # grayscale
-    gray = utils.grayscale_image(img)
-
-    # export width, height and scaling factor
-    height, width = np.shape(img)[0:2]
-    scf = 720/width
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    height = img_res["height"]
+    width = img_res["width"]
+    scf = img_res["scf"]
 
     # create mask
     edges_mag = scharr(gray)
