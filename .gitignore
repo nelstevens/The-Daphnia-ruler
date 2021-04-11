@@ -2,5 +2,6 @@ __pycache__/
 images
 .vscode
 daph_ruler_env
+virtual_env
 newsci_env
 .pyc
