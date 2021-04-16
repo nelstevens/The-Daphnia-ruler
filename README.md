@@ -1,7 +1,7 @@
 # The-Daphnia-ruler
 Automatically collect morphometric traits of Daphnia.
 <!-- badges: start -->
-[![Python build status](https://github.com/nelstevens/The-Daphnia-ruler/workflows/CI-CD/badge.svg)](https://github.com/nelstevens/The-Daphnia-ruler/actions)
+[![Python build status](https://github.com/nelstevens/The-Daphnia-ruler/workflows/build/badge.svg)](https://github.com/nelstevens/The-Daphnia-ruler/actions)
 <!-- badges: end -->
 
 ![](images/final_product_fin.jpg)
