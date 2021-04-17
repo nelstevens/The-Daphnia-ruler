@@ -2,6 +2,7 @@ import os
 import utils
 import numpy as np
 
+# test importing, resizing and grayscaling image
 def test_import_image():
     # run funtion to create dictionary
     res = utils.import_image("./images/test_images/sample1.JPG")
@@ -23,3 +24,23 @@ def test_import_image():
 
     # assert correct scaling factor
     assert res["scf"] == 0.375
+    
+# test creating mask
+def test_create_mask():
+    # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # load comparison file
+    edges_ar = np.load("./tests/assert_edges_sample1.npy")
+
+    # compare array
+    comparison = edges == edges_ar
+    eq = comparison.all()
+
+    # assert True
+    assert eq == True
+
+    

@@ -57,13 +57,7 @@ def head_method(image):
     scf = img_res["scf"]
 
     # create mask
-    edges_mag = scharr(gray)
-    edges_med = np.median(edges_mag)
-    edges_thresh = 2.5*edges_med
-    edges = edges_mag >= edges_thresh
-    edges = morphology.closing(edges, morphology.square(3))
-    edges = ndimage.binary_fill_holes(edges)
-    edges = morphology.erosion(edges, morphology.square(3))
+    edges = utils.create_mask(gray)
 
     # label imageregions and calculate properties
     label_img = morphology.label(edges, connectivity=2, background=0)

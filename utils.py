@@ -39,3 +39,15 @@ def import_image(image):
 
     # export image
     return(res)
+# create function that creates mask
+def create_mask(gray):
+    edges_mag = scharr(gray)
+    edges_med = np.median(edges_mag)
+    edges_thresh = 2.5*edges_med
+    edges = edges_mag >= edges_thresh
+    edges = morphology.closing(edges, morphology.square(3))
+    edges = ndimage.binary_fill_holes(edges)
+    edges = morphology.erosion(edges, morphology.square(3))
+
+    # return edges
+    return(edges)
