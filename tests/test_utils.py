@@ -57,3 +57,22 @@ def test_create_props():
     # assert almost equal with numpy
     np.testing.assert_almost_equal(props[0].solidity, 0.685, 3)
     
+# test eroding mask
+def test_erode_mask():
+        # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # run make properties
+    props = utils.create_props(edges, res["gray"])
+
+    # define gray
+    gray = res["gray"]
+
+    # run erode mask
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # assert correct solidity
+    assert props[0].solidity >= 0.93

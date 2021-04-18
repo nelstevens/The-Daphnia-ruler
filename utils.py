@@ -39,7 +39,7 @@ def import_image(image):
 
     # export image
     return(res)
-    
+
 # create function that creates mask
 def create_mask(gray):
     '''
@@ -68,3 +68,25 @@ def create_props(edges, gray):
 
     # return properties
     return(props)
+
+# create function to erode mask
+def erode_mask(edges, props, gray):
+    # reformat edges to work with opencv
+    edges = np.uint8(edges)
+    edges_res = edges
+    kernel_size = 2
+    # continue opening until solidity fits
+    while props[0].solidity < 0.93:
+        edges_res = edges
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (kernel_size, kernel_size))
+        edges_res = cv2.morphologyEx(edges_res, cv2.MORPH_OPEN, kernel, iterations = 1)
+
+        # relabel imageregions and calculate properties
+        label_img = morphology.label(edges_res, connectivity=2, background=0)
+        props = measure.regionprops(label_img, gray)
+        props = sorted(props, reverse=True, key=lambda k: k.area)
+        kernel_size += 1
+    # create list with results
+    res = [props, edges_res, label_img]
+    # return results
+    return(res)
