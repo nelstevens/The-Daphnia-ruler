@@ -43,4 +43,17 @@ def test_create_mask():
     # assert True
     assert eq == True
 
+# test creating properties
+def test_create_props():
+    # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # run make properties
+    props = utils.create_props(edges, res["gray"])
+
+    # assert almost equal with numpy
+    np.testing.assert_almost_equal(props[0].solidity, 0.685, 3)
     

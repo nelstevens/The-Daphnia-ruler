@@ -17,7 +17,7 @@ import math
 import copy
 import warnings
 import utils
-
+import json
 # create function that does not require landmarks
 def head_method(image):
     ''' This method calculates the Length of the major axis of a fitted ellipse
@@ -33,21 +33,7 @@ def head_method(image):
         and the area of the convex hull
         output['full.Length'] = major axis length of the fitted elipse
         output['image'] = imgage with plotted size estimate'''
-    '''
-    # Load in rayscale, resize
-    img = cv2.imread(image)
-    # save aspect ratio
-    height, width = np.shape(img)[0:2]
 
-    # scale image to 720p width
-    scf = 720/width
-    nwidth = 720
-    nheight = int(height * scf)
-    img = cv2.resize(img, (nwidth, nheight))
-
-    # grayscale image
-    gray = np.uint8(np.mean(img, 2))
-    '''
     # import and resize
     img_res = utils.import_image(image)
 
@@ -58,11 +44,12 @@ def head_method(image):
 
     # create mask
     edges = utils.create_mask(gray)
+    
+    # create regionproperties
+    props = utils.create_props(edges, gray)
 
-    # label imageregions and calculate properties
-    label_img = morphology.label(edges, connectivity=2, background=0)
-    props = measure.regionprops(label_img, gray)
-    props = sorted(props, reverse=True, key=lambda k: k.area)
+    
+
 
     ## erode the mask
     # reformat edges to work with opencv

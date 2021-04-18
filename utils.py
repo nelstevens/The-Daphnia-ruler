@@ -39,8 +39,12 @@ def import_image(image):
 
     # export image
     return(res)
+    
 # create function that creates mask
 def create_mask(gray):
+    '''
+    masks grayscaled image
+    '''
     edges_mag = scharr(gray)
     edges_med = np.median(edges_mag)
     edges_thresh = 2.5*edges_med
@@ -51,3 +55,16 @@ def create_mask(gray):
 
     # return edges
     return(edges)
+
+# create function to label imageregions and calculate properties
+def create_props(edges, gray):
+    '''
+    labels image and defines properties
+    '''
+    # label imageregions and calculate properties
+    label_img = morphology.label(edges, connectivity=2, background=0)
+    props = measure.regionprops(label_img, gray)
+    props = sorted(props, reverse=True, key=lambda k: k.area)
+
+    # return properties
+    return(props)
