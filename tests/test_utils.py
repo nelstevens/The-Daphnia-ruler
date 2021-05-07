@@ -106,3 +106,40 @@ def test_plt_binary():
 
     # assert equality
     assert eq == True
+
+# test plotting contour
+def test_plt_contour():
+    # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # run make properties
+    props = utils.create_props(edges, res["gray"])
+
+    # define gray
+    gray = res["gray"]
+
+    # run erode mask
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # run ploting binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # define img
+    img = res["img"]
+
+    # run plotting contour
+    img = utils.plt_contour(binary2, img)
+
+    # load assertion array
+    image = np.load("./tests/assert_contour_sample1.npy")
+
+    # compare arrays
+    comparison = img == image
+    eq = comparison.all()
+
+    # assert equality
+    assert eq == True
+

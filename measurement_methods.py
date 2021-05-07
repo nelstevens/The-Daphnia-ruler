@@ -55,8 +55,7 @@ def head_method(image):
     binary2 = utils.plt_binary(edges_res, label_img, props)
 
     # plot mask contour on image
-    contours, hierarchy = cv2.findContours(binary2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(img, contours, -1, (0, 0, 255), 1)
+    img = utils.plt_contour(binary2, img)
 
     # plot elipse on image
     cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),

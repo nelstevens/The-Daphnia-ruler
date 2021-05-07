@@ -108,3 +108,14 @@ def plt_binary(edges_res, label_img, props):
     binary2 = np.uint8(255*bw_img_all)
     # return binary array
     return(binary2)
+# create function to plot contour on image
+def plt_contour(binaryimg, img):
+    '''
+    plots contour on image
+    '''
+    # get contours
+    contours, hierarchy = cv2.findContours(binaryimg, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    # draw contour on image
+    cv2.drawContours(img, contours, -1, (0, 0, 255), 1)
+    # return image
+    return(img)
