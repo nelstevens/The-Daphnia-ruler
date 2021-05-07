@@ -108,6 +108,7 @@ def plt_binary(edges_res, label_img, props):
     binary2 = np.uint8(255*bw_img_all)
     # return binary array
     return(binary2)
+
 # create function to plot contour on image
 def plt_contour(binaryimg, img):
     '''
@@ -118,4 +119,16 @@ def plt_contour(binaryimg, img):
     # draw contour on image
     cv2.drawContours(img, contours, -1, (0, 0, 255), 1)
     # return image
+    return(img)
+
+# create function to plot elipse on image
+def plt_elipse(img, props):
+    '''
+    plots elipse on image
+    '''
+    # plot elipse on image
+    cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),
+                (int(props[0].major_axis_length/2), int(props[0].minor_axis_length/2)),
+                (-props[0].orientation*180/pi+90), 0, 360, 0, 0)
+    # return img
     return(img)
