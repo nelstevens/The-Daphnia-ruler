@@ -52,11 +52,7 @@ def head_method(image):
     props, edges_res, label_img = utils.erode_mask(edges, props, gray)
 
     # plot binary image
-    bw_img = 0*edges_res
-    bw_img = (label_img) == props[0].label
-    bw_img_all = bw_img.copy()
-    bw_img_all = bw_img_all + ((label_img) == props[0].label)
-    binary2 = np.uint8(255*bw_img_all)
+    binary2 = utils.plt_binary(edges_res, label_img, props)
 
     # plot mask contour on image
     contours, hierarchy = cv2.findContours(binary2, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)

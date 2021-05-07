@@ -90,3 +90,21 @@ def erode_mask(edges, props, gray):
     res = [props, edges_res, label_img]
     # return results
     return(res)
+
+# create function to plot binary image
+def plt_binary(edges_res, label_img, props):
+    '''
+    creates binary image in numpy format
+    '''
+    # make array of zeros
+    bw_img = 0*edges_res
+    # crop to largest object
+    bw_img = (label_img) == props[0].label
+    # copy image
+    bw_img_all = bw_img.copy()
+    # fill roi
+    bw_img_all = bw_img_all + ((label_img) == props[0].label)
+    # transform to numpy array
+    binary2 = np.uint8(255*bw_img_all)
+    # return binary array
+    return(binary2)

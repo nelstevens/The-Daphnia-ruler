@@ -59,7 +59,7 @@ def test_create_props():
     
 # test eroding mask
 def test_erode_mask():
-        # load image
+    # load image
     res = utils.import_image("./images/test_images/sample1.JPG")
 
     # run edges function
@@ -76,3 +76,33 @@ def test_erode_mask():
 
     # assert correct solidity
     assert props[0].solidity >= 0.93
+
+# test plotting binary image
+def test_plt_binary():
+    # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # run make properties
+    props = utils.create_props(edges, res["gray"])
+
+    # define gray
+    gray = res["gray"]
+
+    # run erode mask
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # run ploting binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # load comparison array
+    bin2 = np.load("./tests/assert_binary_sample1.npy")
+
+    # compare array
+    comparison = binary2 == bin2
+    eq = comparison.all()
+
+    # assert equality
+    assert eq == True
