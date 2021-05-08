@@ -307,6 +307,9 @@ def test_make_res():
     # define image path
     image = "./images/test_images/sample1.JPG"
 
+    # define scaling factor
+    scf = res["scf"]
+
     # run returning results
     res = utils.make_res(img, props, scf, image)
 
