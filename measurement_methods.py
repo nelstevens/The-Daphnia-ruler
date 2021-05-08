@@ -66,40 +66,8 @@ def head_method(image):
     # plot minor axis of fitted elipse
     img = utils.plt_minaxis(img, props)
     
-
-    # get major and minor axis
-    major = props[0].major_axis_length
-    minor = props[0].minor_axis_length
-
-    # add perimeter of mask
-    perimeter = props[0].perimeter
-
-    # add area of mask
-    area = props[0].area
-
-    # add solidity (proportion of the pixels in shape to the pixels in the convex hull)
-    solidity = props[0].solidity
-
-    # Create ID for image with image number and base directory
-    imgnum = os.path.basename(image)
-    imgdir = image.split(os.path.sep)[-2]
-    ID = os.path.join(imgdir, imgnum)
-
-    # scale measurements back to original image size where necessary
-    perimeter = perimeter/scf
-    area = area / scf**2
-    minor = minor/scf
-    major = major/scf
-
-    # create dictionary with results
-    res = {}
-    res['ID'] = ID
-    res['perimeter'] = perimeter
-    res['area'] = area
-    res['minor'] = minor
-    res['solidity'] = solidity
-    res['full.Length'] = major
-    res['image'] = img
+    # make dictionary with resuls
+    res = utils.make_res(img, props, scf, image)
 
     # return results
     return(res)

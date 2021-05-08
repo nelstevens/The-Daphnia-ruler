@@ -268,3 +268,70 @@ def test_plt_minaxis():
 
     # assert equality
     assert eq == True
+
+# test returning results
+def test_make_res():
+    # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # run make properties
+    props = utils.create_props(edges, res["gray"])
+
+    # define gray
+    gray = res["gray"]
+
+    # run erode mask
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # run ploting binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # define img
+    img = res["img"]
+
+    # run plotting contour
+    img = utils.plt_contour(binary2, img)
+
+    # run plotting elipse
+    img = utils.plt_elipse(img, props)
+
+    # run plotting major axis
+    img = utils.plt_majaxis(img, props)
+
+    # run ploting minor axis
+    img = utils.plt_minaxis(img, props)
+
+    # define image path
+    image = "./images/test_images/sample1.JPG"
+
+    # run returning results
+    res = utils.make_res(img, props, scf, image)
+
+    # load comparison array
+    compimg = np.load("./tests/assert_minaxis_sample1.npy")
+
+    # assert img array equality
+    comparison = img == compimg
+    eq = comparison.all()
+    assert eq == True
+
+    # assert correct ID
+    assert res["ID"] == "test_images/sample1.JPG"
+
+    # assert perimeter
+    np.testing.assert_almost_equal(res["perimeter"], 1038.1889, 4)
+
+    # assert area
+    np.testing.assert_almost_equal(res["area"], 65656.8888, 4)
+
+    # assert minor axis
+    np.testing.assert_almost_equal(res["minor"], 207.7906, 4)
+
+    # assert solidity
+    np.testing.assert_almost_equal(res["minor"], 0.9870, 4)
+
+    # assert major axis
+    np.testing.assert_almost_equal(res["full.Length"], 406.9932, 4)

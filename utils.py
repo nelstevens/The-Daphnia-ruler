@@ -178,3 +178,45 @@ def plt_minaxis(img, props):
 
     # return image
     return(img)
+
+# create function to make dictionary of results
+def make_res(img, props, scf, image):
+    '''
+    creates dictionary with results
+    '''
+    # get major and minor axis
+    major = props[0].major_axis_length
+    minor = props[0].minor_axis_length
+
+    # add perimeter of mask
+    perimeter = props[0].perimeter
+
+    # add area of mask
+    area = props[0].area
+
+    # add solidity (proportion of the pixels in shape to the pixels in the convex hull)
+    solidity = props[0].solidity
+
+    # Create ID for image with image number and base directory
+    imgnum = os.path.basename(image)
+    imgdir = image.split(os.path.sep)[-2]
+    ID = os.path.join(imgdir, imgnum)
+
+    # scale measurements back to original image size where necessary
+    perimeter = perimeter/scf
+    area = area / scf**2
+    minor = minor/scf
+    major = major/scf
+
+    # create dictionary with results
+    res = {}
+    res['ID'] = ID
+    res['perimeter'] = perimeter
+    res['area'] = area
+    res['minor'] = minor
+    res['solidity'] = solidity
+    res['full.Length'] = major
+    res['image'] = img
+
+    # return dictionary
+    return(res)
