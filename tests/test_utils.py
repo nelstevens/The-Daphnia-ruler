@@ -334,7 +334,7 @@ def test_make_res():
     np.testing.assert_almost_equal(res["minor"], 207.7906, 4)
 
     # assert solidity
-    np.testing.assert_almost_equal(res["minor"], 0.9870, 4)
+    np.testing.assert_almost_equal(res["solidity"], 0.9870, 4)
 
     # assert major axis
     np.testing.assert_almost_equal(res["full.Length"], 406.9932, 4)
