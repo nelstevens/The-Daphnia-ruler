@@ -132,3 +132,23 @@ def plt_elipse(img, props):
                 (-props[0].orientation*180/pi+90), 0, 360, 0, 0)
     # return img
     return(img)
+
+# create function to plot major axis on image
+def plt_majaxis(img, props):
+     # get deltas
+    dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
+    dy = (props[0].major_axis_length/2)*math.cos(props[0].orientation-(math.pi/2))
+
+    # get start
+    x1 = props[0].centroid[0]-dx
+    y1 = props[0].centroid[1]+dy
+
+    # get end
+    x2 = props[0].centroid[0]+dx
+    y2 = props[0].centroid[1]-dy
+
+    # plot line
+    cv2.line(img, (int(y2), int(x2)), (int(y1), int(x1)), (0, 255, 0), 2)
+
+    # return image
+    return(img)
