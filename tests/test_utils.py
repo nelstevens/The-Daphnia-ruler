@@ -223,3 +223,48 @@ def test_plt_majaxis():
 
     # assert equality
     assert eq == True
+
+# test ploting minor axis
+def test_plt_minaxis():
+     # load image
+    res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # run edges function
+    edges = utils.create_mask(res["gray"])
+
+    # run make properties
+    props = utils.create_props(edges, res["gray"])
+
+    # define gray
+    gray = res["gray"]
+
+    # run erode mask
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # run ploting binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # define img
+    img = res["img"]
+
+    # run plotting contour
+    img = utils.plt_contour(binary2, img)
+
+    # run plotting elipse
+    img = utils.plt_elipse(img, props)
+
+    # run plotting major axis
+    img = utils.plt_majaxis(img, props)
+
+    # run ploting minor axis
+    img = utils.plt_minaxis(img, props)
+
+    # import comparison array
+    image = np.load("./tests/assert_minaxis_sample1.npy")
+
+    # compare arrays
+    comparison = img == image
+    eq = comparison.all()
+
+    # assert equality
+    assert eq == True

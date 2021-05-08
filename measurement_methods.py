@@ -63,21 +63,9 @@ def head_method(image):
     # plot major axis of fitted elipse
     img = utils.plt_majaxis(img, props)
     
-    # # plot minor axis of fitted elipse
-    # get deltas
-    dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation)
-    dy = (props[0].minor_axis_length/2)*math.cos(props[0].orientation)
-
-    # get start
-    x1 = props[0].centroid[0]-dx
-    y1 = props[0].centroid[1]+dy
-
-    # get end
-    x2 = props[0].centroid[0]+dx
-    y2 = props[0].centroid[1]-dy
-
-    # plot line
-    cv2.line(img, (int(y2), int(x2)), (int(y1), int(x1)), (255, 0, 255), 2)
+    # plot minor axis of fitted elipse
+    img = utils.plt_minaxis(img, props)
+    
 
     # get major and minor axis
     major = props[0].major_axis_length
