@@ -6,5 +6,5 @@ def test_is_dir():
     path_wro = "./images/test_imagessss"
 
     # test correcwrong path
-    with pytest.raises(ArgumentTypeError):
+    with pytest.raises(Exception):
         helpers.is_dir(path_cor)
