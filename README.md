@@ -2,6 +2,7 @@
 Automatically collect morphometric traits of Daphnia.
 <!-- badges: start -->
 [![Python build status](https://github.com/nelstevens/The-Daphnia-ruler/workflows/build/badge.svg)](https://github.com/nelstevens/The-Daphnia-ruler/actions)
+[![codecov](https://codecov.io/gh/nelstevens/The-Daphnia-ruler/branch/proper/graph/badge.svg?token=1268756M42)](https://codecov.io/gh/nelstevens/The-Daphnia-ruler)
 <!-- badges: end -->
 
 ![](images/final_product_fin.jpg)
