@@ -340,7 +340,7 @@ def test_make_res():
     # assert major axis
     np.testing.assert_almost_equal(res["full.Length"], 406.9932, 4)
 
-# add find_eye test here!
+# test finding the eye
 def test_find_eye():
     # import and resize
     img_res = utils.import_image("./images/test_images/sample1.JPG")
@@ -386,6 +386,57 @@ def test_find_eye():
     assert cX == 342
     assert cY == 210
 # add find_tip test here!
+def test_find_tip():
+    # import and resize
+    img_res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    scf = img_res["scf"]
+
+    # create mask
+    edges = utils.create_mask(gray)
+
+    # create regionproperties
+    props, label_img = utils.create_props(edges, gray, eyeMethod = True)
+
+    # define uneroded binary image
+    binary1 = utils.plt_binary(edges, label_img, props)
+
+    # erode mask and return new properties
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # plot binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # get major and minor axis
+    major = props[0].major_axis_length
+    minor = props[0].minor_axis_length
+
+    # add perimeter of mask
+    perimeter = props[0].perimeter
+
+    # add area of mask
+    area = props[0].area
+
+    # add solidity (proportion of the pixels in shape to the pixels in the convex hull)
+    solidity = props[0].solidity
+
+
+    # find eye in mask
+    cX, cY = utils.find_eye(binary2, img)
+
+    # find tip of tail and length between eye and tip
+    far_x, far_y, daphnia_Length_eye_tip = utils.find_tip(binary1, cX, cY)
+
+    # assert correct values for far_y, far_y and daphnia_Length_eye_tip
+    assert far_x == 435
+    assert far_y == 361
+    np.testing.assert_almost_equal(daphnia_Length_eye_tip, 177.3415, 4)
+
+
+
 # add find_base test here!
 # add plt_tail test here!
 # add plt_lenth test here!
