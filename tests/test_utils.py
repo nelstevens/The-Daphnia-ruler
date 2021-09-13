@@ -322,7 +322,7 @@ def test_make_res():
     assert eq == True
 
     # assert correct ID
-    assert res["ID"] == "test_images/sample1.JPG"
+    assert res["ID"] == "test_images/sample1.JPG" or res["ID"] == "test_images\\sample1.JPG"
 
     # assert perimeter
     np.testing.assert_almost_equal(res["perimeter"], 1038.1889, 4)
