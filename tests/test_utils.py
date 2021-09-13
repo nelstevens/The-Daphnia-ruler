@@ -385,7 +385,7 @@ def test_find_eye():
     # assert correct cX and cY
     assert cX == 342
     assert cY == 210
-# add find_tip test here!
+# test_find_tip
 def test_find_tip():
     # import and resize
     img_res = utils.import_image("./images/test_images/sample1.JPG")
@@ -435,8 +435,63 @@ def test_find_tip():
     assert far_y == 361
     np.testing.assert_almost_equal(daphnia_Length_eye_tip, 177.3415, 4)
 
-
-
 # add find_base test here!
+def test_find_base():
+        # import and resize
+    img_res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    scf = img_res["scf"]
+
+    # create mask
+    edges = utils.create_mask(gray)
+
+    # create regionproperties
+    props, label_img = utils.create_props(edges, gray, eyeMethod = True)
+
+    # define uneroded binary image
+    binary1 = utils.plt_binary(edges, label_img, props)
+
+    # erode mask and return new properties
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # plot binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # get major and minor axis
+    major = props[0].major_axis_length
+    minor = props[0].minor_axis_length
+
+    # add perimeter of mask
+    perimeter = props[0].perimeter
+
+    # add area of mask
+    area = props[0].area
+
+    # add solidity (proportion of the pixels in shape to the pixels in the convex hull)
+    solidity = props[0].solidity
+
+
+    # find eye in mask
+    cX, cY = utils.find_eye(binary2, img)
+
+    # find tip of tail and length between eye and tip
+    far_x, far_y, daphnia_Length_eye_tip = utils.find_tip(binary1, cX, cY)
+
+    # find base, angle and daphnia length
+    base_x, base_y, daphnia_Length, angle, contours, tail_Length = utils.find_base(binary2, far_x, far_y, cX, cY, daphnia_Length_eye_tip)
+
+    # assert correct values
+    assert base_x == 401
+    assert base_y == 329
+    np.testing.assert_almost_equal(daphnia_Length, 132.8232, 4)
+    np.testing.assert_almost_equal(angle, 159.6364, 4)
+    np.testing.assert_almost_equal(tail_Length, 46.6905, 4)
+
+
+
+
 # add plt_tail test here!
 # add plt_lenth test here!
