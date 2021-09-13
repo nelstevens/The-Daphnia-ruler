@@ -1,9 +1,11 @@
 import measurement_methods
 import numpy as np
+import os
 
 # test head method
 def test_head_method():
-    res = measurement_methods.head_method("./images/test_images/sample1.JPG")
+    pth = os.path.join(os.getcwd(), "images", "test_images", "sample1.JPG")
+    res = measurement_methods.head_method(pth)
 
     # assert dictionary contents one by one
     # load comparison array
@@ -34,7 +36,8 @@ def test_head_method():
 
 # test eye method
 def test_eye_method2():
-    res = measurement_methods.eye_method_2("./images/test_images/sample1.JPG")
+    pth = os.path.join(os.getcwd(), "images", "test_images", "sample1.JPG")
+    res = measurement_methods.eye_method_2(pth)
 
     # assert dictionary one by one
         # assert correct ID
