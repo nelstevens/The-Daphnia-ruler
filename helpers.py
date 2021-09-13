@@ -104,8 +104,7 @@ def check_scale(path):
                 json_file.close()
                 sc_factor = Scale['PixelperMM']
             except json.decoder.JSONDecodeError:
-                print("\n %s cannot be read properly. Please make sure you enter a number or float!" % os.path.join(path, 'Scale.txt'))
-                sys.exit(0)
+                raise ValueError("\n %s cannot be read properly. Please make sure you enter a number or float!" % os.path.join(path, 'Scale.txt'))
 
             # check if scaling factor is accepted data type
             if not isinstance(sc_factor, (int, float)):
@@ -135,8 +134,7 @@ def check_scale(path):
                         json_file.close()
                         sc_factor = Scale['PixelperMM']
                     except json.decoder.JSONDecodeError:
-                        print("\n %s cannot be read properly. Please make sure you enter a number or float!" % os.path.join(dir_path, 'Scale.txt'))
-                        sys.exit(0)
+                        raise ValueError("\n %s cannot be read properly. Please make sure you enter a number or float!" % os.path.join(dir_path, 'Scale.txt'))
 
                     # check if scaling factor is accepted data type
                     if not isinstance(sc_factor, (int, float)):
