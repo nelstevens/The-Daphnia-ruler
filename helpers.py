@@ -178,7 +178,7 @@ def check_scale(path):
 
 
 # define function that scales results to mm
-def scale_measurements(res, img_dir, sc_factor):
+def scale_measurements(res, img_dir, sc_factor, args):
     '''
     This function uses the scaling factor from Scale.txt to convert 
     measurements from pixels to mm.
@@ -223,7 +223,7 @@ def create_df(res, img_dir, args, scaling=None):
     scale = scaling
     # if scaling is activated. overwrite results with scaled measurements
     if args.scaleMM:
-        res = scale_measurements(res, img_dir, scale)
+        res = scale_measurements(res, img_dir, scale, args)
 
 
     # if eye method is activated provide column for it
