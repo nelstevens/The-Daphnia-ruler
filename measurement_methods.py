@@ -137,42 +137,8 @@ def eye_method_2(image):
     # find eye in mask
     cX, cY = utils.find_eye(binary2, img)
 
-
-    # # #  find tip of the tail
-    # find extreme points on uneroded mask
-    contours, hierarchy = cv2.findContours(copy.deepcopy(binary1), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
-    cnt = contours[0]
-
-    leftmost = tuple(cnt[cnt[:, :, 0].argmin()][0])
-    rightmost = tuple(cnt[cnt[:, :, 0].argmax()][0])
-    topmost = tuple(cnt[cnt[:, :, 1].argmin()][0])
-    bottommost = tuple(cnt[cnt[:,:,1].argmax()][0])
-
-    extremes = [leftmost, rightmost, topmost, bottommost]
-    # save extremes and eye in a list
-    points = extremes + [(cX, cY)]
-    # compute distances from eye
-    lengths = []
-    dxs = []
-    dys = []
-    for i in range(len(points)):
-            dy = points[i][0]-points[4][0]
-            dys.append(dy)
-            dx = points[i][1]-points[4][1]
-            dxs.append(dx)
-            L = math.sqrt(dx**2 + dy**2)
-            lengths.append(L)
-
-
-    # find index of max distance
-    max_dist_index = lengths.index(max(lengths))
-
-    # get tip of the tail(note that y,x is exchanged)
-    far_x = int(cX+dys[max_dist_index])
-    far_y = int(cY+dxs[max_dist_index])
-
-    # define distance from eye to tip of tail
-    daphnia_Length_eye_tip = max(lengths)
+    # find tip of tail and length between eye and tip
+    far_x, far_y, daphnia_length_eye_tip = utils.find_tip(binary1, cX, cY)
 
     # # find closest point of mask contour to tip of the tail (base of tail)
 

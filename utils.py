@@ -226,6 +226,9 @@ def make_res(img, props, scf, image):
 
 # create function to find eye in binary image
 def find_eye(binary2, img):
+    '''
+    find position of the eye and teturns its x,y values
+    '''
     # extract daphnia and place on white background
     mask_inv = cv2.bitwise_not(binary2)
     foreground = cv2.bitwise_and(img, img, mask = binary2)
@@ -263,3 +266,42 @@ def find_eye(binary2, img):
     cY = int(M["m01"] / M["m00"])
     # return eye position
     return([cX, cY])
+# create funtion to find tip of tail and define distance from eye to tip of tail
+def find_tip(binary1, cX, cY):
+    '''
+    find position of tip of tail and length between eye and tip of tail.
+    '''
+    # define contours
+    contours, hierarchy = cv2.findContours(copy.deepcopy(binary1), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
+    cnt = contours[0]
+
+    leftmost = tuple(cnt[cnt[:, :, 0].argmin()][0])
+    rightmost = tuple(cnt[cnt[:, :, 0].argmax()][0])
+    topmost = tuple(cnt[cnt[:, :, 1].argmin()][0])
+    bottommost = tuple(cnt[cnt[:,:,1].argmax()][0])
+
+    extremes = [leftmost, rightmost, topmost, bottommost]
+    # save extremes and eye in a list
+    points = extremes + [(cX, cY)]
+    # compute distances from eye
+    lengths = []
+    dxs = []
+    dys = []
+    for i in range(len(points)):
+            dy = points[i][0]-points[4][0]
+            dys.append(dy)
+            dx = points[i][1]-points[4][1]
+            dxs.append(dx)
+            L = math.sqrt(dx**2 + dy**2)
+            lengths.append(L)
+
+
+    # find index of max distance
+    max_dist_index = lengths.index(max(lengths))
+
+    # get tip of the tail(note that y,x is exchanged)
+    far_x = int(cX+dys[max_dist_index])
+    far_y = int(cY+dxs[max_dist_index])
+
+    # define distance from eye to tip of tail
+    daphnia_Length_eye_tip = max(lengths)
