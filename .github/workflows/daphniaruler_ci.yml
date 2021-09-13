@@ -52,4 +52,5 @@ jobs:
     - name: Test with pytest windows
       if: startsWith(matrix.os, 'windows')
       run: |
+        set PYTHONPATH=%PYTHONPATH%;.
         pytest
