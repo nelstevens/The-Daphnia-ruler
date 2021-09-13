@@ -1,4 +1,5 @@
 import helpers
+import pytest
 
 def test_is_dir():
     # set wrong path
