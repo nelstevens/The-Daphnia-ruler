@@ -550,4 +550,63 @@ def test_plt_tail():
 
     # assert equality
     assert eq == True
-# add plt_lenth test here!
+# test plt_length
+def test_plt_length():
+    # import and resize
+    img_res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    scf = img_res["scf"]
+
+    # create mask
+    edges = utils.create_mask(gray)
+
+    # create regionproperties
+    props, label_img = utils.create_props(edges, gray, eyeMethod = True)
+
+    # define uneroded binary image
+    binary1 = utils.plt_binary(edges, label_img, props)
+
+    # erode mask and return new properties
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # plot binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # get major and minor axis
+    major = props[0].major_axis_length
+    minor = props[0].minor_axis_length
+
+    # add perimeter of mask
+    perimeter = props[0].perimeter
+
+    # add area of mask
+    area = props[0].area
+
+    # add solidity (proportion of the pixels in shape to the pixels in the convex hull)
+    solidity = props[0].solidity
+
+
+    # find eye in mask
+    cX, cY = utils.find_eye(binary2, img)
+
+    # find tip of tail and length between eye and tip
+    far_x, far_y, daphnia_Length_eye_tip = utils.find_tip(binary1, cX, cY)
+
+    # find base, angle and daphnia length
+    base_x, base_y, daphnia_Length, angle, contours, tail_Length = utils.find_base(binary2, far_x, far_y, cX, cY, daphnia_Length_eye_tip)
+
+    # plot daphnia Length on image (from eye to base)
+    img = utils. plt_length(img, cX, cY, base_x, base_y)
+
+    # import comparison array
+    image = np.load("./tests/assert_lengtheb_sample1.npy")
+
+    # compare arrays
+    comparison = img == image
+    eq = comparison.all()
+
+    # assert equality
+    assert eq == True
