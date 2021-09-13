@@ -22,42 +22,46 @@ import argparse
 from pathlib import Path
 
 # define measurement approach by implementing different exceptions
-def measure_except(path, args):
+def measure_except_eye(path):
     '''
     This method deals with the appropriate exceptions that need to be
     handled when measuring several daphnia
     '''
-    if args.eyeMethod:
+    try:
+        res = measurement_methods.eye_method_2(path)
+        return(res)
+
+    except IndexError as a:
         try:
-            res = measurement_methods.eye_method_2(path)
-            return(res)
-
-        except IndexError as a:
-            try:
-                res2 = measurement_methods.head_method(path)
-                return(res2)
-
-            except IndexError as e:
-                pass
-        except ValueError as a:
-            try:
-                res2 = measurement_methods.head_method(path)
-                return(res2)
-
-            except IndexError as e:
-                pass
-
-        except ZeroDivisionError as z:
-            res2 = measurement_methods.head_method(path)
-            return(res2)
-    else:
-         try:
             res2 = measurement_methods.head_method(path)
             return(res2)
 
-         except IndexError as e:
-                pass
+        except IndexError as e:
+            pass
+    except ValueError as a:
+        try:
+            res2 = measurement_methods.head_method(path)
+            return(res2)
 
+        except IndexError as e:
+            pass
+
+    except ZeroDivisionError as z:
+        res2 = measurement_methods.head_method(path)
+        return(res2)
+    
+# define measurement approach by implementing different exceptions
+def measure_except(path):
+    '''
+    This method deals with the appropriate exceptions that need to be
+    handled when measuring several daphnia
+    '''
+    try:
+        res2 = measurement_methods.head_method(path)
+        return(res2)
+
+    except IndexError as e:
+        pass
 # define argparse function to check whether input directory is valid
 def is_dir(path):
     '''
@@ -311,7 +315,10 @@ def process_directory(d, args):
             p = Pool(processes = cpu_count() - 1)
 
             # split work on workers and implement progress bar
-            result = list(tqdm(p.imap(measure_except, files), total = len(files)))
+            if args.eyeMethod:
+                result = list(tqdm(p.imap(measure_except_eye, files), total = len(files)))
+            else:
+                result = list(tqdm(p.imap(measure_except, files), total = len(files)))
             p.close()
             p.join()
 

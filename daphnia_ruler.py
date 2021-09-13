@@ -55,4 +55,4 @@ if __name__ == '__main__':
     for root, dirs, filenames in os.walk(source):
         for d in dirs:
             directory_in = os.path.join(root,d)
-            helpers.process_directory(directory_in)
+            helpers.process_directory(directory_in, args = args)
