@@ -140,48 +140,11 @@ def eye_method_2(image):
     # find tip of tail and length between eye and tip
     far_x, far_y, daphnia_Length_eye_tip = utils.find_tip(binary1, cX, cY)
 
-    # # find closest point of mask contour to tip of the tail (base of tail)
-
-    # get contour of eroded mask
-    contours, hierarchy = cv2.findContours(copy.deepcopy(binary2), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
-    # convert contours to a list
-    contours = contours[0]
-
-    # convert tail tip to list
-    tail_tip = [far_x, far_y]
-
-
-
-    lin_distances = np.empty(0)
-    for i in range(0,len(contours)):
-        con_x = contours[i][0][0]
-        con_y = contours[i][0][1]
-        lin_dis = math.sqrt(abs(con_x-tail_tip[0])**2 + abs(con_y-tail_tip[1])**2)
-        lin_distances = np.append(lin_distances, lin_dis)
-
-    # find index of minimal value
-    base_index = np.where(lin_distances == np.min(lin_distances))[0][0]
-    # find base
-    base = contours[base_index]
-    base_x = base[0][0]
-    base_y = base[0][1]
-
-    # define tail length
-    tail_Length = np.min(lin_distances)
+    # find base, angle and daphnia length
+    base_x, base_y, daphnia_Length, angle, contours, tail_Length = utils.find_base(binary2, far_x, far_y, cX, cY, daphnia_Length_eye_tip)
     
-
-    # define Length of daphnia from eye to base of the tail
-    daphnia_Length = math.sqrt((cX - base_x)**2 + (cY - base_y)**2)
-
-    # find angle between tail and line from eye to base of tail
-    with warnings.catch_warnings():
-        warnings.simplefilter('ignore')
-        cos_angle = (tail_Length**2 + daphnia_Length**2 - daphnia_Length_eye_tip**2)/(2*tail_Length*daphnia_Length)
-        angle = math.acos(cos_angle) * (180/pi)
-
-    # # #  plot everything
     # plot mask contour on image
-    cv2.drawContours(img, contours, -1, (0, 0, 255), 1)
+    img = utils.plt_contour(binary2, img)
 
     # plot elipse on image
     cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),
