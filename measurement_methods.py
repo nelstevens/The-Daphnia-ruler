@@ -261,9 +261,7 @@ def eye_method_2(image):
 if __name__ == '__main__':
     res1 = head_method(sys.argv[1])
     try:
-        res2 = eye_method(sys.argv[1])
         res3 = eye_method_2(sys.argv[1])
-        cv2.imshow('eye method 1', res2['image'])
         cv2.imshow('eye method 2', res3['image'])
     except:
         print('Eye detetion failed!')
