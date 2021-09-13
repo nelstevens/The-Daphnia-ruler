@@ -56,6 +56,7 @@ def test_create_props():
 
     # assert almost equal with numpy
     np.testing.assert_almost_equal(props[0].solidity, 0.685, 3)
+    # add eyeMethod options here!
     
 # test eroding mask
 def test_erode_mask():

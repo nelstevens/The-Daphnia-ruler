@@ -94,42 +94,23 @@ def eye_method(image):
         output['tail.angle'] = the angle between the tail and the line between
         eye and the base of the tail
         output['image'] = imgage with plotted size estimate'''
-    # Load in rayscale, resize
-    img = cv2.imread(image)
-    
-    # save aspect ratio
-    height, width = np.shape(img)[0:2]
 
-    # scale image to 720p width
-    scf = 720/width
-    nwidth = 720
-    nheight = int(height * scf)
-    img = cv2.resize(img, (nwidth, nheight))
-    
-    #grayscale image
-    gray = np.uint8(np.mean(img, 2))
+    # import and resize
+    img_res = utils.import_image(image)
 
-    # create uneroded mask
-    edges_mag = scharr(gray)
-    edges_med = np.median(edges_mag)
-    edges_thresh = 2.5*edges_med
-    edges = edges_mag >= edges_thresh
-    edges = morphology.closing(edges, morphology.square(3))
-    edges = ndimage.binary_fill_holes(edges)
-    edges = morphology.erosion(edges, morphology.square(3))
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    scf = img_res["scf"]
 
+    # create mask
+    edges = utils.create_mask(gray)
 
-    # label imageregions and calculate properties
-    label_img = morphology.label(edges, connectivity=2, background=0)
-    props = measure.regionprops(label_img, gray)
-    props = sorted(props, reverse=True, key=lambda k: k.area)
+    # create regionproperties
+    props = utils.create_props(edges, gray)
 
     # define uneroded binary image
-    bw_img = 0*edges
-    bw_img = (label_img) == props[0].label
-    bw_img_all = bw_img.copy()
-    bw_img_all = bw_img_all + ((label_img) == props[0].label)
-    binary1 = np.uint8(255*bw_img_all)
+    binary1 = utils.plt_binary(edges, props)
 
     # # erode the mask
     # reformat edges to work with opencv
@@ -377,65 +358,29 @@ def eye_method_2(image):
         output['tail.angle'] = the angle between the tail and the line between
         eye and the base of the tail
         output['image'] = imgage with plotted size estimate'''
-    # Load in rayscale, resize
-    img = cv2.imread(image)
-    # save aspect ratio
-    height, width = np.shape(img)[0:2]
 
-    # scale image to 720p width
-    scf = 720/width
-    nwidth = 720
-    nheight = int(height * scf)
-    img = cv2.resize(img, (nwidth, nheight))
-    
-    #grayscale image
-    gray = np.uint8(np.mean(img, 2))
+    # import and resize
+    img_res = utils.import_image(image)
 
-    # create uneroded mask
-    edges_mag = scharr(gray)
-    edges_med = np.median(edges_mag)
-    edges_thresh = 2.5*edges_med
-    edges = edges_mag >= edges_thresh
-    edges = morphology.closing(edges, morphology.square(3))
-    edges = ndimage.binary_fill_holes(edges)
-    edges = morphology.erosion(edges, morphology.square(3))
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    scf = img_res["scf"]
 
+    # create mask
+    edges = utils.create_mask(gray)
 
-    # label imageregions and calculate properties
-    label_img = morphology.label(edges, connectivity=2, background=0)
-    props = measure.regionprops(label_img, gray)
-    props = sorted(props, reverse=True, key=lambda k: k.area)
+    # create regionproperties
+    props, label_img = utils.create_props(edges, gray, eyeMethod = True)
 
     # define uneroded binary image
-    bw_img = 0*edges
-    bw_img = (label_img) == props[0].label
-    bw_img_all = bw_img.copy()
-    bw_img_all = bw_img_all + ((label_img) == props[0].label)
-    binary1 = np.uint8(255*bw_img_all)
+    binary1 = utils.plt_binary(edges, label_img, props)
 
-    # # erode the mask
-    # reformat edges to work with opencv
-    edges = np.uint8(edges)
-    edges_res = edges
-    kernel_size = 2
-    # continue opening until solidity fits
-    while props[0].solidity < 0.93:
-        edges_res = edges
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (kernel_size,kernel_size))
-        edges_res = cv2.morphologyEx(edges_res, cv2.MORPH_OPEN, kernel, iterations = 1)
+    # erode mask and return new properties
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
 
-        # label imageregions and calculate properties
-        label_img = morphology.label(edges_res, connectivity=2, background=0)
-        props = measure.regionprops(label_img, gray)
-        props = sorted(props, reverse=True, key=lambda k: k.area)
-        kernel_size += 1
-
-    # get binary image of eroded mask
-    bw_img = 0*edges_res
-    bw_img = (label_img) == props[0].label
-    bw_img_all = bw_img.copy()
-    bw_img_all = bw_img_all + ((label_img) == props[0].label)
-    binary2 = np.uint8(255*bw_img_all)
+    # plot binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
 
     # get major and minor axis
     major = props[0].major_axis_length
@@ -452,42 +397,7 @@ def eye_method_2(image):
 
 
     # find eye in mask
-
-    # extract daphnia and place on white background
-    mask_inv = cv2.bitwise_not(binary2)
-    foreground = cv2.bitwise_and(img, img, mask = binary2)
-    background = np.copy(img)
-    background[:] = 255
-    background = cv2.bitwise_and(background, background, mask = mask_inv)
-    product = cv2.add(foreground, background)
-
-
-    # # filter by black color
-    full_black = np.array([0, 0, 0])
-    half_black = np.array([100, 100, 100])
-
-    # filter with broad spectrum
-    black = cv2.inRange(product, full_black, half_black)
-    eye_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (int(2), int(2)))
-    black_eroded = cv2.morphologyEx(black, cv2.MORPH_OPEN, eye_kernel, iterations = 2)
-
-    # define contour
-    contours, hierarchy = cv2.findContours(copy.deepcopy(black_eroded), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
-
-    # change thin colour spectrum until contours are of length one
-    while len(contours) > 1:
-        half_black = half_black - [10, 10, 10]
-        black = cv2.inRange(product, full_black, half_black)
-        eye_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (int(2), int(2)))
-        black_eroded = cv2.morphologyEx(black, cv2.MORPH_OPEN, eye_kernel, iterations = 2)
-
-        # define contour
-        contours, hierarchy = cv2.findContours(copy.deepcopy(black_eroded), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
-
-
-    M = cv2.moments(contours[0])
-    cX = int(M["m10"] / M["m00"])
-    cY = int(M["m01"] / M["m00"])
+    cX, cY = utils.find_eye(binary2, img)
 
 
     # # #  find tip of the tail

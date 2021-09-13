@@ -57,7 +57,7 @@ def create_mask(gray):
     return(edges)
 
 # create function to label imageregions and calculate properties
-def create_props(edges, gray):
+def create_props(edges, gray, eyeMethod=False):
     '''
     labels image and defines properties
     '''
@@ -66,8 +66,11 @@ def create_props(edges, gray):
     props = measure.regionprops(label_img, gray)
     props = sorted(props, reverse=True, key=lambda k: k.area)
 
-    # return properties
-    return(props)
+    # return properties only props if eyemethod = F else props and label_img
+    if eyeMethod == False:
+        return(props)
+    else:
+        return([props, label_img])
 
 # create function to erode mask
 def erode_mask(edges, props, gray):
@@ -220,3 +223,43 @@ def make_res(img, props, scf, image):
 
     # return dictionary
     return(res)
+
+# create function to find eye in binary image
+def find_eye(binary2, img):
+    # extract daphnia and place on white background
+    mask_inv = cv2.bitwise_not(binary2)
+    foreground = cv2.bitwise_and(img, img, mask = binary2)
+    background = np.copy(img)
+    background[:] = 255
+    background = cv2.bitwise_and(background, background, mask = mask_inv)
+    product = cv2.add(foreground, background)
+
+
+    # # filter by black color
+    full_black = np.array([0, 0, 0])
+    half_black = np.array([100, 100, 100])
+
+    # filter with broad spectrum
+    black = cv2.inRange(product, full_black, half_black)
+    eye_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (int(2), int(2)))
+    black_eroded = cv2.morphologyEx(black, cv2.MORPH_OPEN, eye_kernel, iterations = 2)
+
+    # define contour
+    contours, hierarchy = cv2.findContours(copy.deepcopy(black_eroded), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
+
+    # change thin colour spectrum until contours are of length one
+    while len(contours) > 1:
+        half_black = half_black - [10, 10, 10]
+        black = cv2.inRange(product, full_black, half_black)
+        eye_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (int(2), int(2)))
+        black_eroded = cv2.morphologyEx(black, cv2.MORPH_OPEN, eye_kernel, iterations = 2)
+
+        # define contour
+        contours, hierarchy = cv2.findContours(copy.deepcopy(black_eroded), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
+
+
+    M = cv2.moments(contours[0])
+    cX = int(M["m10"] / M["m00"])
+    cY = int(M["m01"] / M["m00"])
+    # return eye position
+    return([cX, cY])
