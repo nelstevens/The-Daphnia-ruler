@@ -44,3 +44,10 @@ jobs:
       run: |
         export PYTHONPATH="."
         pytest
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        export PYTHONPATH="."
+        pytest
+      if: startsWith(matrix.os, 'windows')
+      run: |
+        pytest
