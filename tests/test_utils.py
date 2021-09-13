@@ -306,8 +306,7 @@ def test_make_res():
     img = utils.plt_minaxis(img, props)
 
     # define image path
-    image = "./images/test_images/sample1.JPG"
-
+    image = os.path.join(os.getcwd(), "images", "test_images", "sample1.JPG")
     # define scaling factor
     scf = res["scf"]
 
