@@ -305,3 +305,6 @@ def find_tip(binary1, cX, cY):
 
     # define distance from eye to tip of tail
     daphnia_Length_eye_tip = max(lengths)
+
+    # return postion and length
+    return([far_x, far_y, daphnia_Length_eye_tip])

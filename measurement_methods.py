@@ -138,7 +138,7 @@ def eye_method_2(image):
     cX, cY = utils.find_eye(binary2, img)
 
     # find tip of tail and length between eye and tip
-    far_x, far_y, daphnia_length_eye_tip = utils.find_tip(binary1, cX, cY)
+    far_x, far_y, daphnia_Length_eye_tip = utils.find_tip(binary1, cX, cY)
 
     # # find closest point of mask contour to tip of the tail (base of tail)
 
