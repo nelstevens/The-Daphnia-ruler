@@ -341,6 +341,50 @@ def test_make_res():
     np.testing.assert_almost_equal(res["full.Length"], 406.9932, 4)
 
 # add find_eye test here!
+def test_find_eye():
+    # import and resize
+    img_res = utils.import_image("./images/test_images/sample1.JPG")
+
+    # define output into different variables
+    img = img_res["img"]
+    gray = img_res["gray"]
+    scf = img_res["scf"]
+
+    # create mask
+    edges = utils.create_mask(gray)
+
+    # create regionproperties
+    props, label_img = utils.create_props(edges, gray, eyeMethod = True)
+
+    # define uneroded binary image
+    binary1 = utils.plt_binary(edges, label_img, props)
+
+    # erode mask and return new properties
+    props, edges_res, label_img = utils.erode_mask(edges, props, gray)
+
+    # plot binary image
+    binary2 = utils.plt_binary(edges_res, label_img, props)
+
+    # get major and minor axis
+    major = props[0].major_axis_length
+    minor = props[0].minor_axis_length
+
+    # add perimeter of mask
+    perimeter = props[0].perimeter
+
+    # add area of mask
+    area = props[0].area
+
+    # add solidity (proportion of the pixels in shape to the pixels in the convex hull)
+    solidity = props[0].solidity
+
+
+    # find eye in mask
+    cX, cY = utils.find_eye(binary2, img)
+
+    # assert correct cX and cY
+    assert cX == 342
+    assert cY == 210
 # add find_tip test here!
 # add find_base test here!
 # add plt_tail test here!
