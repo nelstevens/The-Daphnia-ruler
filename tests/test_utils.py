@@ -339,3 +339,5 @@ def test_make_res():
 
     # assert major axis
     np.testing.assert_almost_equal(res["full.Length"], 406.9932, 4)
+
+# add find_eye test here!
