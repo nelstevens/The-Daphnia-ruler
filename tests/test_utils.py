@@ -342,3 +342,6 @@ def test_make_res():
 
 # add find_eye test here!
 # add find_tip test here!
+# add find_base test here!
+# add plt_tail test here!
+# add plt_lenth test here!

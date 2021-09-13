@@ -183,7 +183,7 @@ def plt_minaxis(img, props):
     return(img)
 
 # create function to make dictionary of results
-def make_res(img, props, scf, image):
+def make_res(img, props, scf, image, eyeMethod = False, tail_Length = None, daphnia_Length = None, angle = None):
     '''
     creates dictionary with results
     '''
@@ -211,6 +211,7 @@ def make_res(img, props, scf, image):
     minor = minor/scf
     major = major/scf
 
+
     # create dictionary with results
     res = {}
     res['ID'] = ID
@@ -220,6 +221,14 @@ def make_res(img, props, scf, image):
     res['solidity'] = solidity
     res['full.Length'] = major
     res['image'] = img
+
+        # add additions if eyeMethod is true
+    if eyeMethod:
+        tail_Length = tail_Length/scf
+        daphnia_Length = daphnia_Length/scf
+        res['tail.Length'] = tail_Length
+        res['eye.Length'] = daphnia_Length
+        res['tail.angle'] = angle
 
     # return dictionary
     return(res)
@@ -353,3 +362,25 @@ def find_base(binary2, far_x, far_y, cX, cY, daphnia_Length_eye_tip):
 
     # return list
     return([base_x, base_y, daphnia_Length, angle, contours, tail_Length])
+
+# define function to plot tail on image
+def plt_tail(img, far_x, far_y, base_x, base_y):
+    '''
+    plots tail on image.
+    '''
+    # plot tail on image
+    cv2.line(img, (far_x,far_y),(base_x, base_y), (255, 0, 0), 2)
+
+    # return image
+    return(img)
+
+# define function to plot distance of eye to base of tail
+def plt_length(img, cX, cY, base_x, base_y):
+    '''
+    plots length of daphnia on image (length = line between eye and base of tail)
+    '''
+    # plot daphnia Length on image (from eye to base)
+    cv2.line(img, (cX, cY), (base_x, base_y), (0, 0, 255), 2)
+
+    # return image
+    return(img)
