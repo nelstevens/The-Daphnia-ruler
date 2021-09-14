@@ -9,7 +9,7 @@ def test_head_method():
 
     # assert dictionary contents one by one
     # load comparison array
-    compimg = np.load("./tests/assert_minaxis_sample1.npy")
+    compimg = np.load("./tests/test_arrays/assert_minaxis_sample1.npy")
 
     # assert img array equality
     comparison = res["image"] == compimg

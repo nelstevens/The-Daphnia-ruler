@@ -8,8 +8,8 @@ def test_import_image():
     res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # load comparison files
-    img_ar = np.load("./tests/assert_img_sample1.npy")
-    gray_ar = np.load("./tests/assert_gray_sample1.npy")
+    img_ar = np.load("./tests/test_arrays/assert_img_sample1.npy")
+    gray_ar = np.load("./tests/test_arrays/assert_gray_sample1.npy")
 
     # compare both image arrays
     comparison = img_ar == res["img"]
@@ -34,7 +34,7 @@ def test_create_mask():
     edges = utils.create_mask(res["gray"])
 
     # load comparison file
-    edges_ar = np.load("./tests/assert_edges_sample1.npy")
+    edges_ar = np.load("./tests/test_arrays/assert_edges_sample1.npy")
 
     # compare array
     comparison = edges == edges_ar
@@ -99,7 +99,7 @@ def test_plt_binary():
     binary2 = utils.plt_binary(edges_res, label_img, props)
 
     # load comparison array
-    bin2 = np.load("./tests/assert_binary_sample1.npy")
+    bin2 = np.load("./tests/test_arrays/assert_binary_sample1.npy")
 
     # compare array
     comparison = binary2 == bin2
@@ -135,7 +135,7 @@ def test_plt_contour():
     img = utils.plt_contour(binary2, img)
 
     # load assertion array
-    image = np.load("./tests/assert_contour_sample1.npy")
+    image = np.load("./tests/test_arrays/assert_contour_sample1.npy")
 
     # compare arrays
     comparison = img == image
@@ -174,7 +174,7 @@ def test_plt_elipse():
     img = utils.plt_elipse(img, props)
 
     # load comparison array
-    image = np.load("./tests/assert_elipse_sample1.npy")
+    image = np.load("./tests/test_arrays/assert_elipse_sample1.npy")
 
     # compare array
     comparison = img == image
@@ -216,7 +216,7 @@ def test_plt_majaxis():
     img = utils.plt_majaxis(img, props)
 
     # import comparison array
-    image = np.load("./tests/assert_majaxis_sample1.npy")
+    image = np.load("./tests/test_arrays/assert_majaxis_sample1.npy")
 
     # compare array
     comparison = img == image
@@ -261,7 +261,7 @@ def test_plt_minaxis():
     img = utils.plt_minaxis(img, props)
 
     # import comparison array
-    image = np.load("./tests/assert_minaxis_sample1.npy")
+    image = np.load("./tests/test_arrays/assert_minaxis_sample1.npy")
 
     # compare arrays
     comparison = img == image
@@ -314,7 +314,7 @@ def test_make_res():
     res = utils.make_res(img, props, scf, image)
 
     # load comparison array
-    compimg = np.load("./tests/assert_minaxis_sample1.npy")
+    compimg = np.load("./tests/test_arrays/assert_minaxis_sample1.npy")
 
     # assert img array equality
     comparison = img == compimg
@@ -541,7 +541,7 @@ def test_plt_tail():
     img = utils.plt_tail(img, far_x, far_y, base_x, base_y)
 
     # import comparison array
-    image = np.load("./tests/assert_tail_sample1.npy")
+    image = np.load("./tests/test_arrays/assert_tail_sample1.npy")
 
     # compare arrays
     comparison = img == image
@@ -601,7 +601,7 @@ def test_plt_length():
     img = utils. plt_length(img, cX, cY, base_x, base_y)
 
     # import comparison array
-    image = np.load("./tests/assert_lengtheb_sample1.npy")
+    image = np.load("./tests/test_arrays/assert_lengtheb_sample1.npy")
 
     # compare arrays
     comparison = img == image
