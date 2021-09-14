@@ -5,7 +5,7 @@ import numpy as np
 # test importing, resizing and grayscaling image
 def test_import_image():
     # run funtion to create dictionary
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # load comparison files
     img_ar = np.load("./tests/assert_img_sample1.npy")
@@ -28,7 +28,7 @@ def test_import_image():
 # test creating mask
 def test_create_mask():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -46,7 +46,7 @@ def test_create_mask():
 # test creating properties
 def test_create_props():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -61,7 +61,7 @@ def test_create_props():
 # test eroding mask
 def test_erode_mask():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -81,7 +81,7 @@ def test_erode_mask():
 # test plotting binary image
 def test_plt_binary():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -111,7 +111,7 @@ def test_plt_binary():
 # test plotting contour
 def test_plt_contour():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -147,7 +147,7 @@ def test_plt_contour():
 # test plotting elipse
 def test_plt_elipse():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -186,7 +186,7 @@ def test_plt_elipse():
 # test plotting major axis
 def test_plt_majaxis():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -228,7 +228,7 @@ def test_plt_majaxis():
 # test ploting minor axis
 def test_plt_minaxis():
      # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -273,7 +273,7 @@ def test_plt_minaxis():
 # test returning results
 def test_make_res():
     # load image
-    res = utils.import_image("./images/test_images/sample1.JPG")
+    res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # run edges function
     edges = utils.create_mask(res["gray"])
@@ -306,7 +306,7 @@ def test_make_res():
     img = utils.plt_minaxis(img, props)
 
     # define image path
-    image = os.path.join(os.getcwd(), "images", "test_images", "sample1.JPG")
+    image = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample1.JPG")
     # define scaling factor
     scf = res["scf"]
 
@@ -342,7 +342,7 @@ def test_make_res():
 # test finding the eye
 def test_find_eye():
     # import and resize
-    img_res = utils.import_image("./images/test_images/sample1.JPG")
+    img_res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # define output into different variables
     img = img_res["img"]
@@ -387,7 +387,7 @@ def test_find_eye():
 # test_find_tip
 def test_find_tip():
     # import and resize
-    img_res = utils.import_image("./images/test_images/sample1.JPG")
+    img_res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # define output into different variables
     img = img_res["img"]
@@ -437,7 +437,7 @@ def test_find_tip():
 # test find_base
 def test_find_base():
     # import and resize
-    img_res = utils.import_image("./images/test_images/sample1.JPG")
+    img_res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # define output into different variables
     img = img_res["img"]
@@ -492,7 +492,7 @@ def test_find_base():
 # test plt_tail
 def test_plt_tail():
     # import and resize
-    img_res = utils.import_image("./images/test_images/sample1.JPG")
+    img_res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # define output into different variables
     img = img_res["img"]
@@ -552,7 +552,7 @@ def test_plt_tail():
 # test plt_length
 def test_plt_length():
     # import and resize
-    img_res = utils.import_image("./images/test_images/sample1.JPG")
+    img_res = utils.import_image("./tests/test_dirs/test_images/sample1.JPG")
 
     # define output into different variables
     img = img_res["img"]

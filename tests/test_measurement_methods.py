@@ -4,7 +4,7 @@ import os
 
 # test head method
 def test_head_method():
-    pth = os.path.join(os.getcwd(), "images", "test_images", "sample1.JPG")
+    pth = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample1.JPG")
     res = measurement_methods.head_method(pth)
 
     # assert dictionary contents one by one
@@ -36,7 +36,7 @@ def test_head_method():
 
 # test eye method
 def test_eye_method2():
-    pth = os.path.join(os.getcwd(), "images", "test_images", "sample1.JPG")
+    pth = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample1.JPG")
     res = measurement_methods.eye_method_2(pth)
 
     # assert dictionary one by one
