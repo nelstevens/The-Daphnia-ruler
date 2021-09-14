@@ -8,7 +8,7 @@ def test_is_dir():
 
     # test correcwrong path
     with pytest.raises(Exception):
-        helpers.is_dir(path_cor)
+        helpers.is_dir(path_wro)
 
 # test check scale function
 def test_check_scale():
