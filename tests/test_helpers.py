@@ -50,3 +50,10 @@ def test_check_scale():
     # expect error
     with pytest.raises(ValueError):
         helpers.check_scale(pth)
+    
+    # excpect error also when wrong scale in higher level directory
+    pth = "./tests/test_dirs/test_images_2ndlvl_scale_wrong"
+
+    # expect error
+    with pytest.raises(ValueError):
+        helpers.check_scale(pth)
