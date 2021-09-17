@@ -1,6 +1,38 @@
 import helpers
 import pytest
 
+# test if measure_except_eye behaves properly on different images
+def test_measure_except_eye():
+    # path to image where eye can be detected
+    pth_ey = "./tests/test_dirs/test_images/sample1.JPG"
+    # path to image where eye can't be detected
+    pth_no = "./tests/test_dirs/test_images/sample3.JPG"
+
+    # run measure_except_eye on both
+    res_eye = helpers.measure_except_eye(pth_ey)
+    res_no = helpers.measure_except_eye(pth_no)
+
+    # assert that res_eye[eye.Length] exists
+    assert "eye.Length" in res_eye.keys()
+    # assert that res_no[eye.Length] does not exist
+    assert "eye.Length" not in res_no.keys()
+
+# test that measure_except never returns eye.Length
+def test_measure_except():
+     # path to image where eye can be detected
+    pth_ey = "./tests/test_dirs/test_images/sample1.JPG"
+    # path to image where eye can't be detected
+    pth_no = "./tests/test_dirs/test_images/sample3.JPG"
+
+    # run measure_except_eye on both
+    res_eye = helpers.measure_except(pth_ey)
+    res_no = helpers.measure_except(pth_no)
+
+    # assert that res_eye[eye.Length] does not exists
+    assert "eye.Length" not in res_eye.keys()
+    # assert that res_no[eye.Length] does not exist
+    assert "eye.Length" not in res_no.keys()
+
 # test is_dir function
 def test_is_dir():
     # set wrong path
