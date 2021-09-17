@@ -6,9 +6,7 @@ import os
 def test_measure_except_eye():
     # path to image where eye can be detected
     pth_ey = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample1.JPG")
-    #pth_ey = "./tests/test_dirs/test_images/sample1.JPG"
     # path to image where eye can't be detected
-    #pth_no = "./tests/test_dirs/test_images/sample3.JPG"
     pth_no = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample3.JPG")
 
     # run measure_except_eye on both
@@ -22,10 +20,10 @@ def test_measure_except_eye():
 
 # test that measure_except never returns eye.Length
 def test_measure_except():
-     # path to image where eye can be detected
-    pth_ey = "./tests/test_dirs/test_images/sample1.JPG"
+    # path to image where eye can be detected
+    pth_ey = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample1.JPG")
     # path to image where eye can't be detected
-    pth_no = "./tests/test_dirs/test_images/sample3.JPG"
+    pth_no = os.path.join(os.getcwd(), "tests", "test_dirs", "test_images", "sample3.JPG")
 
     # run measure_except_eye on both
     res_eye = helpers.measure_except(pth_ey)
