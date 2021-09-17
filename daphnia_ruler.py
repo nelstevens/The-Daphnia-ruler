@@ -22,24 +22,26 @@ import argparse
 from pathlib import Path
 import helpers
 
-# use argparse to create optional arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('-p', '--path', help='Path to your input directory. The program is able to loop through subdirectories of the input.', type=helpers.is_dir)
-parser.add_argument('-n', '--noImages', help="Don't write images with results overplotted.", action='store_true')
-parser.add_argument('-e', '--eyeMethod', help="Implement eye method on top of ellipse method.", action='store_true')
-parser.add_argument('-s', '--scaleMM', help="Scale measurement to mm. For more information see README.md", action='store_true')
+# define main
+def main():
+    '''
+    run whole daphnia ruler.
+    '''
 
-#if no arguments are provided go to help menu
-if len(sys.argv) == 1:
-    parser.print_help()
-    sys.exit(0)
+    # use argparse to create optional arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--path', help='Path to your input directory. The program is able to loop through subdirectories of the input.', type=helpers.is_dir)
+    parser.add_argument('-n', '--noImages', help="Don't write images with results overplotted.", action='store_true')
+    parser.add_argument('-e', '--eyeMethod', help="Implement eye method on top of ellipse method.", action='store_true')
+    parser.add_argument('-s', '--scaleMM', help="Scale measurement to mm. For more information see README.md", action='store_true')
 
-#parse arguments
-args = parser.parse_args()
+    #if no arguments are provided go to help menu
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
 
-
-
-if __name__ == '__main__':
+    #parse arguments
+    args = parser.parse_args()
 
     # set source to directory input if it's a valid directory
     source = helpers.is_dir(args.path)
@@ -56,3 +58,8 @@ if __name__ == '__main__':
         for d in dirs:
             directory_in = os.path.join(root,d)
             helpers.process_directory(directory_in, args = args)
+
+if __name__ == '__main__':
+    print(sys.argv)
+    # run main
+    main()
