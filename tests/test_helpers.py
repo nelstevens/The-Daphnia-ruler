@@ -4,6 +4,7 @@ import os
 import numpy as np
 import sys
 import daphnia_ruler as dr
+import pandas as pd
 
 # test if measure_except_eye behaves properly on different images
 def test_measure_except_eye():
@@ -114,3 +115,51 @@ def test_scale_measurements_head(monkeypatch):
         for key in ["perimeter", "area", "minor", "full.Length"]:
             assert actual[0][key] == expected[0][key]
             assert actual[1][key] == expected[1][key]
+
+# test creat df
+def test_create_df_eye(monkeypatch):
+        # set sys.argv correctly
+    with monkeypatch.context() as m:
+        m.setattr(sys, "argv", ["daphnia_ruler.py", "-p", "./tests/test_dirs/test_images", "-e"])
+        # get input array
+        inarr = np.load(os.path.join(os.getcwd(), "tests", "test_arrays", "scale_measurement_array.npy"), allow_pickle = True)
+        # get actual
+        actual = helpers.create_df(
+            res = inarr,
+            img_dir = ".",
+            args = dr.parse_args(sys.argv)
+        )
+
+        # assert correct shape
+        assert actual.shape == (2,9)
+
+        # assert correct columns
+        assert np.all(actual.columns == ["ID", "body.Length.h", "body.Length.e",
+         "tail.Length", "body.Perimeter", "body.Area", "body.Width", "solidity", "tail.Angle"])
+
+        # assert dtypes
+        assert np.all(actual.dtypes == ["object", 'float64', 'object', 'object', 'float64', 'float64', 'float64', 'float64', "object"])
+
+# test creat df
+def test_create_df_head(monkeypatch):
+        # set sys.argv correctly
+    with monkeypatch.context() as m:
+        m.setattr(sys, "argv", ["daphnia_ruler.py", "-p", "./tests/test_dirs/test_images"])
+        # get input array
+        inarr = np.load(os.path.join(os.getcwd(), "tests", "test_arrays", "scale_measurement_array.npy"), allow_pickle = True)
+        # get actual
+        actual = helpers.create_df(
+            res = inarr,
+            img_dir = ".",
+            args = dr.parse_args(sys.argv)
+        )
+
+        # assert correct shape
+        assert actual.shape == (2,6)
+
+        # assert correct columns
+        assert np.all(actual.columns == ["ID", "body.Length.h",
+         "body.Perimeter", "body.Area", "body.Width", "solidity"])
+
+        # assert dtypes
+        assert np.all(actual.dtypes == ["object", 'float64', 'float64', 'float64', 'float64', 'float64'])
