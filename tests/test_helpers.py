@@ -142,7 +142,7 @@ def test_create_df_eye(monkeypatch):
 
 # test creat df
 def test_create_df_head(monkeypatch):
-        # set sys.argv correctly
+    # set sys.argv correctly
     with monkeypatch.context() as m:
         m.setattr(sys, "argv", ["daphnia_ruler.py", "-p", "./tests/test_dirs/test_images"])
         # get input array
@@ -163,3 +163,33 @@ def test_create_df_head(monkeypatch):
 
         # assert dtypes
         assert np.all(actual.dtypes == ["object", 'float64', 'float64', 'float64', 'float64', 'float64'])
+        
+# create directory paths
+pths = [os.path.join(os.getcwd(), "tests", "test_dirs", "test_ruler"), os.path.join(os.getcwd(), "tests", "test_dirs", "test_ruler_recursive")]
+
+# test process directory runs
+@pytest.mark.parametrize("dirs", pths)
+def test_process_directory(monkeypatch, dirs):
+    # set sys.argv correctly
+    with monkeypatch.context() as m:
+        m.setattr(sys, "argv", ["daphnia_ruler.py", "-p", dirs])
+
+        # define args
+        args = dr.parse_args(sys.argv)
+
+        # set source to directory input if it's a valid directory
+        source = helpers.is_dir(args.path)
+        # assert no error
+        try:
+            #if source directory contains images, prcess them
+            helpers.process_directory(source, args = args)
+
+            # loop through subdirectories and process the appropriate ones
+            for root, dirs, filenames in os.walk(source):
+                for d in dirs:
+                    directory_in = os.path.join(root,d)
+                    helpers.process_directory(directory_in, args = args)
+            assert True
+        except:
+            assert False
+
