@@ -9,6 +9,7 @@
 	2d. Don't write images with measurements\
 	2e. Scale measurements from pixel to another unit of length
 3. Output
+4. Supported operating systems
 
 ## 1. Introduction
 The Daphnia ruler is a command line program that allows the collection of 
@@ -148,3 +149,6 @@ with results overplotted (unless argument -n is
 active; see 2d). This new subfolder will also include a single 
 csv file containing all measurements for each image in the original
 directory.
+
+## 4. supported operating Systems
+The Daphnia ruler is tested on Windows, macOS and Ubuntu (Linux). If errors occur please open an issue on Github preferably with a reproducable example.
