@@ -111,7 +111,7 @@ However it is only usefull in measuring daphnia with visible eyes. For all other
 
 ### 2c. Don't write images with measurements
 Using the -n flag disables the writing of images with measurements overploted. Having images with measurements overploted is useful for checking individual measurements for their accuracy. However with large samples or limited storage space one might prefer not to have this output. 
-Writing images to disk can be disabled with the following code:
+Writing images to disk can be disabled with the following code:\
 Windows:
 ```powershell
 python daphnia_ruler.py -n -p C:\Users\'Username'\input_directory
@@ -120,7 +120,18 @@ MacOS and Linux:
 ```bash
 python daphnia_ruler.py -n -p ~/zooplankton_project/input_directory
 ```
-
+### 2c. Scale measurements from pixel to another unit of length
+The -s flag enables scaling of measurements. Note that this requires a file called Scale.txt in each directory containing images.\
+A template for this file can be found in the github repository Github.com/nelstevens/The-Daphnia-ruler. Copy this file to each directory containing images and exchange NUM to the desired scaling factor. For instance if 100 pixels in an image corresponds to 1 cm of length exchange NUM with 100. If NUM is exchanged by a non valid entry (not a number) the daphnia ruler will throw an error. If a directory does not contain the Scale.txt file the user is asked wether this directory should be skipped or not.
+The following code enables scaling:\
+Windows:
+```powershell
+python daphnia_ruler.py -s -p C:\Users\'Username'\input_directory
+```
+MacOS and Linux:
+```bash
+python daphnia_ruler.py -s -p ~/zooplankton_project/input_directory
+```
 
 ### 2c. Output
 The daphnia ruler will create a subfolder in each directory of the input 
