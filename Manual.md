@@ -60,7 +60,7 @@ Windows:
 ```powershell
 python daphnia_ruler.py -p C:\Users\'Username'\input_directory
 ```
-MacOs and Linus:
+MacOs and Linux:
 ```bash
 python daphnia_ruler.py -p ~/zooplankton_project/input_directory
 ```
@@ -92,6 +92,24 @@ way to achieve this is to photograph individuals on clean microscope slides.
 As mentioned in the introduction additional features can be measured for 
 Daphnia. In order to do so it is crucial that images are taken by means
 of bright field photography.
+
+### 2c. The Eye method
+Using the -e flag users can specify whether the localization of the eye should be included in the measurement process. 
+When the -e flag is set the daphnia ruler will try to locate the eye in the image and measure the distance from the eye to the base of the tail,
+the length of the tail and the angle between the tail and the body axis.
+Your input should look like this:
+Windows:
+```powershell
+python daphnia_ruler.py -e -p C:\Users\'Username'\input_directory
+```
+MacOs and Linux:
+```bash
+python daphnia_ruler.py -e -p ~/zooplankton_project/input_directory
+```
+The eye method can be very usefull in measuring daphnia by potentially improving measurement accuracy since this method relies less on acurate masking of the daphnia body.
+However it is only usefull in measuring daphnia with visible eyes. For all other zooplankton species this method is not of use.
+
+
 
 ### 2c. Output
 The daphnia ruler will create a subfolder in each directory of the input 
