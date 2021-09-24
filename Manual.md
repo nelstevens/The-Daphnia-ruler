@@ -4,7 +4,12 @@
 	1a. Measured traits
 2. Usage
 	2a. The help menu
-	2b. Input
+	2b. directory input
+	2c. The Eye method
+	2d. Don't write images with measurements
+	2e. Scale measurements from pixel to another unit of length
+3. Output\
+
 ## 1. Introduction
 The Daphnia ruler is a command line program that allows the collection of 
 morphometric data of zooplankton from still images. It was specifically
@@ -32,7 +37,7 @@ For Daphnia additional features can be measured (for instructions see usage):
 ## 2. Usage and arguments
 The Daphnia ruler is simple to use and requires a maximum of four arguments.
 Only one argument is mandatory which specifies the path to an input
-directory (see 2b. Input). All other arguments are optional and will be
+directory (see 2b. Input). All other arguments are optional, can be combined as desired and will be
 described in detail in the corresponding subsections. 
 
 To use the daphnia ruler first install it and its dependencies
@@ -42,6 +47,8 @@ daphnia ruler only works when the working directory contains the following
 files:
 * daphnia_ruler.py
 * measurement_methods.py
+* helpers.py
+* utils.py
 
 ### 2a. The help menu
 The help menu very briefly describes the usage of the daphnia ruler and
@@ -53,7 +60,7 @@ python daphnia_ruler.py -h
 This command will show all possible arguments the daphnia ruler accepts
 plus a short description of each argument.
 
-### 2b. directory nput
+### 2b. directory input
 The input path is specified using the -p flag.
 Example:
 Windows:
@@ -109,7 +116,7 @@ python daphnia_ruler.py -e -p ~/zooplankton_project/input_directory
 The eye method can be very usefull in measuring daphnia by potentially improving measurement accuracy since this method relies less on acurate masking of the daphnia body.
 However it is only usefull in measuring daphnia with visible eyes. For all other zooplankton species this method is not of use.
 
-### 2c. Don't write images with measurements
+### 2d. Don't write images with measurements
 Using the -n flag disables the writing of images with measurements overploted. Having images with measurements overploted is useful for checking individual measurements for their accuracy. However with large samples or limited storage space one might prefer not to have this output. 
 Writing images to disk can be disabled with the following code:\
 Windows:
@@ -120,7 +127,7 @@ MacOS and Linux:
 ```bash
 python daphnia_ruler.py -n -p ~/zooplankton_project/input_directory
 ```
-### 2c. Scale measurements from pixel to another unit of length
+### 2e. Scale measurements from pixel to another unit of length
 The -s flag enables scaling of measurements. Note that this requires a file called Scale.txt in each directory containing images.\
 A template for this file can be found in the github repository Github.com/nelstevens/The-Daphnia-ruler. Copy this file to each directory containing images and exchange NUM to the desired scaling factor. For instance if 100 pixels in an image corresponds to 1 cm of length exchange NUM with 100. If NUM is exchanged by a non valid entry (not a number) the daphnia ruler will throw an error. If a directory does not contain the Scale.txt file the user is asked wether this directory should be skipped or not.
 The following code enables scaling:\
@@ -133,11 +140,11 @@ MacOS and Linux:
 python daphnia_ruler.py -s -p ~/zooplankton_project/input_directory
 ```
 
-### 2c. Output
+## 3. Output
 The daphnia ruler will create a subfolder in each directory of the input 
 that contains images. These subfolders will be named results and contain 
 a copy of each image 
 with results overplotted (unless argument -n is 
-active; see 2....). This new subfolder will also include a single 
+active; see 2d). This new subfolder will also include a single 
 csv file containing all measurements for each image in the original
 directory.
