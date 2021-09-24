@@ -29,7 +29,7 @@ For Daphnia additional features can be measured (for instructions see usage):
 * tail length (blue line)
 * tail angle
 
-## 2. Usage
+## 2. Usage and arguments
 The Daphnia ruler is simple to use and requires a maximum of four arguments.
 Only one argument is mandatory which specifies the path to an input
 directory (see 2b. Input). All other arguments are optional and will be
@@ -53,11 +53,16 @@ python daphnia_ruler.py -h
 This command will show all possible arguments the daphnia ruler accepts
 plus a short description of each argument.
 
-### 2b. Input
+### 2b. directory nput
 The input path is specified using the -p flag.
 Example:
-```bash
+Windows:
+```powershell
 python daphnia_ruler.py -p C:\Users\'Username'\input_directory
+```
+MacOs and Linus:
+```bash
+python daphnia_ruler.py -p ~/zooplankton_project/input_directory
 ```
 This command specified 'input_directory' as the input for the daphnia ruler.
 
