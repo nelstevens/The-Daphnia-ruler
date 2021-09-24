@@ -32,7 +32,7 @@ For Daphnia additional features can be measured (for instructions see usage):
 * body size: measured from the center of the eye to the base of the tail 
 (red line)
 * tail length (blue line)
-* tail angle
+* tail angle (angle between red and blue line)
 
 ## 2. Usage and arguments
 The Daphnia ruler is simple to use and requires a maximum of four arguments.
@@ -103,7 +103,7 @@ of bright field photography.
 ### 2c. The Eye method
 Using the -e flag users can specify whether the localization of the eye should be included in the measurement process. 
 When the -e flag is set the daphnia ruler will try to locate the eye in the image and measure the distance from the eye to the base of the tail,
-the length of the tail and the angle between the tail and the body axis.
+the length of the tail and the angle between the tail (blue line in image) and the body length (red line in image).
 Your input should look like this:
 Windows:
 ```powershell
