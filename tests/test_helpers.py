@@ -163,9 +163,9 @@ def test_create_df_head(monkeypatch):
 
         # assert dtypes
         assert np.all(actual.dtypes == ["object", 'float64', 'float64', 'float64', 'float64', 'float64'])
-'''
+
 # create directory paths
-pths = [os.path.join(os.getcwd(), "tests", "test_dirs", "test_ruler"), os.path.join(os.getcwd(), "tests", "test_dirs", "test_ruler_recursive")]
+pths = [os.path.join(os.getcwd(), "tests", "test_dirs", "test_ruler")]#, os.path.join(os.getcwd(), "tests", "test_dirs", "test_ruler_recursive")]
 
 # test process directory runs
 @pytest.mark.parametrize("dirs", pths)
@@ -192,4 +192,4 @@ def test_process_directory(monkeypatch, dirs):
             assert True
         except:
             assert False
-'''
+
