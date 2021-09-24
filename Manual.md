@@ -60,7 +60,7 @@ Windows:
 ```powershell
 python daphnia_ruler.py -p C:\Users\'Username'\input_directory
 ```
-MacOs and Linux:
+MacOS and Linux:
 ```bash
 python daphnia_ruler.py -p ~/zooplankton_project/input_directory
 ```
@@ -102,13 +102,24 @@ Windows:
 ```powershell
 python daphnia_ruler.py -e -p C:\Users\'Username'\input_directory
 ```
-MacOs and Linux:
+MacOS and Linux:
 ```bash
 python daphnia_ruler.py -e -p ~/zooplankton_project/input_directory
 ```
 The eye method can be very usefull in measuring daphnia by potentially improving measurement accuracy since this method relies less on acurate masking of the daphnia body.
 However it is only usefull in measuring daphnia with visible eyes. For all other zooplankton species this method is not of use.
 
+### 2c. Don't write images with measurements
+Using the -n flag disables the writing of images with measurements overploted. Having images with measurements overploted is useful for checking individual measurements for their accuracy. However with large samples or limited storage space one might prefer not to have this output. 
+Writing images to disk can be disabled with the following code:
+Windows:
+```powershell
+python daphnia_ruler.py -n -p C:\Users\'Username'\input_directory
+```
+MacOS and Linux:
+```bash
+python daphnia_ruler.py -n -p ~/zooplankton_project/input_directory
+```
 
 
 ### 2c. Output
