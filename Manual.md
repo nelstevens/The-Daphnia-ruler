@@ -1,13 +1,13 @@
 # The-Daphnia-ruler manual
 ## Contents
-1. Introduction
-	1a. Measured traits
-2. Usage
-	2a. The help menu
-	2b. directory input
-	2c. The Eye method
-	2d. Don't write images with measurements
-	2e. Scale measurements from pixel to another unit of length
+1. Introduction\
+	1a. Measured traits\
+2. Usage\
+	2a. The help menu\
+	2b. directory input\
+	2c. The Eye method\
+	2d. Don't write images with measurements\
+	2e. Scale measurements from pixel to another unit of length\
 3. Output
 
 ## 1. Introduction
