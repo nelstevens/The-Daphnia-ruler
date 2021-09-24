@@ -48,6 +48,8 @@ optional arguments:
   -s, --scaleMM         Scale measurement to mm. For more information see
                         Manual.md.
 ```
+## Contributions
+Collaborators are always welcome. Feel free to write pull requests or contact nelson.stevens92@gmail.com for further information.
 
 ## Author
 * Nelson Stevens
