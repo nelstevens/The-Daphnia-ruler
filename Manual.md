@@ -8,7 +8,7 @@
 	2c. The Eye method
 	2d. Don't write images with measurements
 	2e. Scale measurements from pixel to another unit of length
-3. Output\
+3. Output
 
 ## 1. Introduction
 The Daphnia ruler is a command line program that allows the collection of 
