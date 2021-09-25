@@ -76,8 +76,11 @@ def create_props(edges, gray, eyeMethod=False):
 def erode_mask(edges, props, gray):
     # reformat edges to work with opencv
     edges = np.uint8(edges)
+    # copy edges in case no opening is necessary
     edges_res = edges
     kernel_size = 2
+    # create labeled image in case no opening is necessary
+    label_img = morphology.label(edges, connectivity=2, background=0)
     # continue opening until solidity fits
     while props[0].solidity < 0.93:
         edges_res = edges
