@@ -66,6 +66,5 @@ def main():
             helpers.process_directory(directory_in, args = args)
 
 if __name__ == '__main__':
-    print(sys.argv)
     # run main
     main()
