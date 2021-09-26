@@ -1,10 +1,14 @@
 # The-Daphnia-ruler
 Automatically collect morphometric traits of Daphnia.
+<!-- badges: start -->
+[![Python build status](https://github.com/nelstevens/The-Daphnia-ruler/workflows/build/badge.svg)](https://github.com/nelstevens/The-Daphnia-ruler/actions)
+[![codecov](https://codecov.io/gh/nelstevens/The-Daphnia-ruler/branch/proper/graph/badge.svg?token=1268756M42)](https://codecov.io/gh/nelstevens/The-Daphnia-ruler)
+<!-- badges: end -->
 
 ![](images/final_product_fin.jpg)
 ## Overview
 The Daphnia ruler is a command line program that can measure morphometric traits of Daphnia from images taken under a microscope. 
-The Daphnia ruler works in both windows and linux and can measure the following traits:
+The Daphnia ruler works in windows, macOS and linux and can measure the following traits:
 * body size: measured from the center of the eye to the base of the tail (red line in image)
 * body size: approximated by fitting an ellipse around the Daphnia body (green line in image)
 * tail length (blue line in image)
