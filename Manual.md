@@ -63,7 +63,7 @@ plus a short description of each argument.
 
 ### 2b. directory input
 The input path is specified using the -p flag.
-Example:
+Example:\
 Windows:
 ```powershell
 python daphnia_ruler.py -p C:\Users\'Username'\input_directory
@@ -105,7 +105,7 @@ of bright field photography.
 Using the -e flag users can specify whether the localization of the eye should be included in the measurement process. 
 When the -e flag is set the daphnia ruler will try to locate the eye in the image and measure the distance from the eye to the base of the tail,
 the length of the tail and the angle between the tail (blue line in image) and the body length (red line in image).
-Your input should look like this:
+Your input should look like this:\
 Windows:
 ```powershell
 python daphnia_ruler.py -e -p C:\Users\'Username'\input_directory
@@ -151,4 +151,4 @@ csv file containing all measurements for each image in the original
 directory.
 
 ## 4. supported operating Systems
-The Daphnia ruler is tested on Windows, macOS and Ubuntu (Linux). If errors occur please open an issue on Github preferably with a reproducable example.
+The Daphnia ruler is tested on Windows, macOS and Ubuntu (Linux). If errors occur please open an issue on Github preferably with a reproducible example.
