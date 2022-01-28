@@ -9,4 +9,5 @@ src/daphruler/utils.py
 src/daphruler.egg-info/PKG-INFO
 src/daphruler.egg-info/SOURCES.txt
 src/daphruler.egg-info/dependency_links.txt
+src/daphruler.egg-info/requires.txt
 src/daphruler.egg-info/top_level.txt
