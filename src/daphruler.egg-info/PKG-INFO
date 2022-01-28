@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: daphruler
 Version: 0.3.0
-Summary: Automate collecting morphometric traits of zooplankton
+Summary: Automate collecting morphometric traits of zooplankton.
 Home-page: https://github.com/nelstevens/The-Daphnia-ruler
 Author: Nelson Stevens
 Author-email: nelson.stevens92@gmail.com
@@ -9,7 +9,6 @@ License: UNKNOWN
 Project-URL: Bug Tracker, https://github.com/nelstevens/The-Daphnia-ruler/issues
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
-Classifier: Development Status :: 3 - Alpha
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 

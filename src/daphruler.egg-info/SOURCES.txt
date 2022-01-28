@@ -1,6 +1,6 @@
 README.md
 pyproject.toml
-setup.cfg
+setup.py
 src/daphruler/__init__.py
 src/daphruler/daphnia_ruler.py
 src/daphruler/helpers.py
