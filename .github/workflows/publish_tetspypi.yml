@@ -4,9 +4,8 @@ on:
   push:
     branches:
     - f-packaged
-
 jobs:
-  buildandpublishtest:
+  build-and-publish-test:
     name: build and publish to test PyPi
     runs-on: ubuntu-18.04
     steps:
@@ -22,12 +21,12 @@ jobs:
         build
         --user
     - name: Build binary wheel and source tarball
-    run: >-
-      python -m
-      build
-      --stdist
-      --wheel
-      --outdir dist/
+      run: >-
+        python -m
+        build
+        --stdist
+        --wheel
+        --outdir dist/
     - name: Publish distribution 📦 to Test PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
