@@ -6,7 +6,7 @@ on:
     - f-packaged
 
 jobs:
-  build-and-publish-test:
+  buildandpublishtest:
     name: build and publish to test PyPi
     runs-on: ubuntu-18.04
     steps:
