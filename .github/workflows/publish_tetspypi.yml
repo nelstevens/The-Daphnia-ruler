@@ -24,7 +24,7 @@ jobs:
       run: >-
         python -m
         build
-        --stdist
+        --sdist
         --wheel
         --outdir dist/
     - name: Publish distribution 📦 to Test PyPI
