@@ -16,7 +16,7 @@ from scipy import ndimage
 import math
 import copy
 import warnings
-# import utils
+from daphruler import utils
 import json
 # create function that does not require landmarks
 def head_method(image):
