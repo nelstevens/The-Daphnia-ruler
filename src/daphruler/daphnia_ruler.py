@@ -23,9 +23,17 @@ from pathlib import Path
 from daphruler import helpers
 
 def parse_args(args):
-    '''
-    parse arguments properly
-    '''
+    """parse arguments properly
+
+    Parameters
+    ----------
+    args : Arguments from cli
+        
+
+    Returns
+    -------
+
+    """
     # use argparse to create optional arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path', help='Path to your input directory. The program is able to loop through subdirectories of the input.', type=helpers.is_dir)
@@ -44,9 +52,7 @@ def parse_args(args):
 
 # define main
 def main():
-    '''
-    run whole daphnia ruler.
-    '''
+    """run whole daphnia ruler."""
     # parse arguments
     args = parse_args(sys.argv)
     # set source to directory input if it's a valid directory
