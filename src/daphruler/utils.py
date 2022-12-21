@@ -2,7 +2,6 @@
 import os
 import cv2
 import numpy as np
-import sys
 from math import pi
 from skimage import morphology, measure
 from skimage.filters import scharr

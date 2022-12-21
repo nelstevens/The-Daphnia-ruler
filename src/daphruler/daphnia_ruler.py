@@ -8,18 +8,8 @@ Created on Mon Oct  8 19:28:26 2018
 
 
 #load libraries
-import time
-import os
-import json
-import cv2
 import sys
-from daphruler import measurement_methods
-import imghdr
-import pandas as pd
-from multiprocessing import Pool, cpu_count
-from tqdm import tqdm
 import argparse
-from pathlib import Path
 from daphruler import helpers
 
 def parse_args(args):

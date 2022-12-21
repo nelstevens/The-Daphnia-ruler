@@ -5,19 +5,9 @@ Created on Fri May  3 14:21:59 2019
 @author: Nelson
 """
 # import libraries
-import os
 import cv2
-import numpy as np
 import sys
-from math import pi
-from skimage import morphology, measure
-from skimage.filters import scharr
-from scipy import ndimage
-import math
-import copy
-import warnings
 from daphruler import utils
-import json
 # create function that does not require landmarks
 def head_method(image):
     """This method calculates the Length of the major axis of a fitted ellipse

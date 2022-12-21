@@ -19,7 +19,6 @@ import pandas as pd
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 import argparse
-from pathlib import Path
 
 # define measurement approach by implementing different exceptions
 def measure_except_eye(path):
