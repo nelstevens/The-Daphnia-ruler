@@ -1,4 +1,4 @@
-import measurement_methods
+import daphruler.measurement_methods as measurement_methods
 import numpy as np
 import os
 

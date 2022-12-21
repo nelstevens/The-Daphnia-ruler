@@ -1,5 +1,5 @@
 import os
-import utils
+import daphruler.utils as utils
 import numpy as np
 
 # test importing, resizing and grayscaling image

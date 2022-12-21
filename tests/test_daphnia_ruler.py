@@ -1,6 +1,6 @@
 # test daphnia ruler
 import sys
-import daphnia_ruler as dr
+import daphruler.daphnia_ruler as dr
 import os
 import pytest
 # create directory paths
