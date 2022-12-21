@@ -5,9 +5,7 @@ Summary: Automate collecting morphometric traits of zooplankton.
 Home-page: https://github.com/nelstevens/The-Daphnia-ruler
 Author: Nelson Stevens
 Author-email: nelson.stevens92@gmail.com
-License: UNKNOWN
 Project-URL: Bug Tracker, https://github.com/nelstevens/The-Daphnia-ruler/issues
-Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
@@ -68,5 +66,3 @@ Collaborators are always welcome. Feel free to write pull requests or contact ne
 ## Author
 * Nelson Stevens
 * Contact: nelson.stevens92@gmail.com
-
-

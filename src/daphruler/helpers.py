@@ -429,3 +429,14 @@ def process_directory(d, args):
                     cv2.imwrite(os.path.join(destination, ID), di['image'])
             # print total elapsed time for directory d
             print('total elapsed time (s): ' + str(time.time()-start))
+
+def process_recursive(source, args):
+    """Process input directory and children"""
+    #if source directory contains images, prcess them
+    process_directory(source, args = args)
+
+    # loop through subdirectories and process the appropriate ones
+    for root, dirs, filenames in os.walk(source):
+        for d in dirs:
+            directory_in = os.path.join(root,d)
+            process_directory(directory_in, args = args)
