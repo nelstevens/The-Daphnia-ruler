@@ -28,11 +28,9 @@ def head_method(image):
     image : str
         path to image source
 
-        
-
     Returns
     -------
-    dictionary with 8 values:
+    dictionary with 8 values : 
         output['ID'] : ID of the image
         output['perimeter'] = perimeter os binary mask
         output['area'] = area of binary mask
@@ -41,6 +39,8 @@ def head_method(image):
         and the area of the convex hull
         output['full.Length'] = major axis length of the fitted elipse
         output['image'] = imgage with plotted size estimate
+
+    
     """
 
     # import and resize
@@ -95,11 +95,10 @@ def eye_method_2(image):
     ----------
     image : str
         path to image source
-        
 
     Returns
     -------
-    dictionary with 8 values:
+    dictionary with 8 values : 
         output['ID'] : ID of the image
         output['eye.length'] = Length from eye to base of tail
         output['perimeter'] = perimeter os binary mask
@@ -112,6 +111,8 @@ def eye_method_2(image):
         output['tail.angle'] = the angle between the tail and the line between
         eye and the base of the tail
         output['image'] = imgage with plotted size estimate
+
+    
     """
 
     # import and resize

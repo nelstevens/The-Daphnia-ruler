@@ -33,6 +33,7 @@ def parse_args(args):
     Returns
     -------
 
+    
     """
     # use argparse to create optional arguments
     parser = argparse.ArgumentParser()
@@ -51,12 +52,31 @@ def parse_args(args):
     return(args)
 
 class Attributes_maker(dict):
+    """ Turn dictionary into class to add attributes"""
     def __init__(self, d):
         self.__dict__ = d
 
 def daphniaruler(path, noImages=False, eyeMethod=False, scaleMM=False):
-    """
-    edit me
+    """run raphniaruler
+
+    Parameters
+    ----------
+    path : str
+        path to directory with images or subdirectories with images
+        
+    noImages : bool
+        output images with results highlighted
+         (Default value = False)
+    eyeMethod : bool
+        Measure distance from eye to base of tail if possible
+         (Default value = False)
+    scaleMM : bool
+        scale measurements from pixel to mm
+         (Default value = False)
+
+    Returns
+    -------
+    nothing
     """
     args_dict = {
         "path": path,

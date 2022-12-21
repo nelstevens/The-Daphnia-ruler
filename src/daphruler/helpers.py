@@ -30,11 +30,13 @@ def measure_except_eye(path):
     ----------
     path : str
         path to image
-        
 
     Returns
     -------
     List of measurements and image with results plotted
+        
+
+    
     """
     try:
         res = measurement_methods.eye_method_2(path)
@@ -66,13 +68,15 @@ def measure_except(path):
 
     Parameters
     ----------
-    path :str
+    path : str
         path to image
-        
 
     Returns
     -------
     List of measurements and image with results plotted
+        
+
+    
     """
     try:
         res2 = measurement_methods.head_method(path)
@@ -89,11 +93,13 @@ def is_dir(path):
     ----------
     path : str
         path to check if it's a directory
-        
 
     Returns
     -------
     path if check has passed. Otherwise an error is raised
+        
+
+    
     """
     if not os.path.isdir(path):
         raise argparse.ArgumentTypeError('input directory: %s is not a valid path' % path)
@@ -109,11 +115,13 @@ def check_scale(path):
     ----------
     path : str
         Path to directory or parent directory where scale.txt file should be.
-        
 
     Returns
     -------
     nothing
+        
+
+    
     """
     # set counter for missing scaling files
     missing_dir = []
@@ -220,19 +228,19 @@ def scale_measurements(res, img_dir, sc_factor, args):
     ----------
     res : list
         list with original measurements without scaling
-        
     img_dir : str
         path to image directory
-        
     sc_factor : float
         scaling factor
-        
     args : arguments from cli
         
 
     Returns
     -------
     List with measurements scaled to mm
+        
+
+    
     """
     # scale measurements
     for inst in res:
@@ -273,19 +281,20 @@ def create_df(res, img_dir, args, scaling=None):
     ----------
     res : list
         List with measurement results
-        
     img_dir : str
         path to image directory
-        
     args : args from cli
         
     scaling : float
         Scaling factor
-         (Default value = None)
+        (Default value = None)
 
     Returns
     -------
     Dataframe with measurement results
+        
+
+    
     """
     # define scale
     scale = scaling
@@ -337,13 +346,15 @@ def process_directory(d, args):
     ----------
     d : str
         path to directory
-        
     args : args from cli
         
 
     Returns
     -------
     nothing
+        
+
+    
     """
     if not d.endswith('results'):
         # create list of image files
@@ -431,7 +442,20 @@ def process_directory(d, args):
             print('total elapsed time (s): ' + str(time.time()-start))
 
 def process_recursive(source, args):
-    """Process input directory and children"""
+    """Process input directory and children
+
+    Parameters
+    ----------
+    source : str
+        source directory
+        
+    args : args from argparser
+        
+
+    Returns
+    -------
+    nothing
+    """
     #if source directory contains images, prcess them
     process_directory(source, args = args)
 

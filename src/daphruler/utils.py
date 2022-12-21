@@ -20,11 +20,13 @@ def import_image(image):
     ----------
     image : str
         path to image source
-        
 
     Returns
     -------
     dictionary containing. image as numpy array, grayscale image as numpy array, scaling factor as float
+        
+
+    
     """
     # Load in rayscale, resize
     img = cv2.imread(image)
@@ -55,13 +57,15 @@ def create_mask(gray):
 
     Parameters
     ----------
-    gray :  numpy array
+    gray : numpy array
         grayscaled image array
-        
 
     Returns
     -------
     array of image with edges highlighted
+        
+
+    
     """
     edges_mag = scharr(gray)
     edges_med = np.median(edges_mag)
@@ -82,17 +86,18 @@ def create_props(edges, gray, eyeMethod=False):
     ----------
     edges : array
         array of image with edges highlighted
-        
     gray : array
         grascaled image array
-        
     eyeMethod : bool
         whether to use eyeMethod
-         (Default value = False)
+        (Default value = False)
 
     Returns
     -------
     image properties
+        
+
+    
     """
     # label imageregions and calculate properties
     label_img = morphology.label(edges, connectivity=2, background=0)
@@ -113,16 +118,17 @@ def erode_mask(edges, props, gray):
     ----------
     edges : array
         array with edges highlighted
-        
     props : image properties
         
     gray : array
         grayscaled image array
-        
 
     Returns
     -------
     list with new properties, new edges and labeled image
+        
+
+    
     """
     # reformat edges to work with opencv
     edges = np.uint8(edges)
@@ -155,7 +161,6 @@ def plt_binary(edges_res, label_img, props):
     ----------
     edges_res : array
         array with edges highlighted
-        
     label_img : labeled images
         
     props : image properties
@@ -164,6 +169,9 @@ def plt_binary(edges_res, label_img, props):
     Returns
     -------
     binary numpy array
+        
+
+    
     """
     # make array of zeros
     bw_img = 0*edges_res
@@ -186,14 +194,15 @@ def plt_contour(binaryimg, img):
     ----------
     binaryimg : array
         binary image array
-        
     img : array
         imagearray
-        
 
     Returns
     -------
     image array with contour highlighted
+        
+
+    
     """
     # get contours
     contours, hierarchy = cv2.findContours(binaryimg, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -210,13 +219,15 @@ def plt_elipse(img, props):
     ----------
     img : array
         image array
-        
     props : image properties
         
 
     Returns
     -------
     image array with elipse highlighted
+        
+
+    
     """
     # plot elipse on image
     cv2.ellipse(img, (int(props[0].centroid[1]), int(props[0].centroid[0])),
@@ -233,13 +244,15 @@ def plt_majaxis(img, props):
     ----------
     img : array
         image array
-        
     props : image properties
         
 
     Returns
     -------
     image array with major axis highlighted
+        
+
+    
     """
      # get deltas
     dx = (props[0].major_axis_length/2)*math.sin(props[0].orientation-(math.pi/2))
@@ -265,15 +278,17 @@ def plt_minaxis(img, props):
 
     Parameters
     ----------
-    img :array
+    img : array
         image array
-        
     props : image properties
         
 
     Returns
     -------
     image array with minor axis highlighted
+        
+
+    
     """
     # get deltas
     dx = (props[0].minor_axis_length/2)*math.sin(props[0].orientation)
@@ -301,31 +316,31 @@ def make_res(img, props, scf, image, eyeMethod = False, tail_Length = None, daph
     ----------
     img : array
         image array
-        
     props : image properties
         
     scf : float
         scaling factor
-        
     image : str
         path to image source
-        
     eyeMethod : bool
         whether to use eyemethod
-         (Default value = False)
+        (Default value = False)
     tail_Length : float
         Length of tail
-         (Default value = None)
+        (Default value = None)
     daphnia_Length : float
         Length of daphnia
-         (Default value = None)
+        (Default value = None)
     angle :
         Angle between tail and major axis
-         (Default value = None)
+        (Default value = None)
 
     Returns
     -------
     dictionary with measurement results.
+        
+
+    
     """
     # get major and minor axis
     major = props[0].major_axis_length
@@ -381,14 +396,15 @@ def find_eye(binary2, img):
     ----------
     binary2 : array
         binary array
-        
     img : array
         image array
-        
 
     Returns
     -------
     coordinated of eye as list
+        
+
+    
     """
     # extract daphnia and place on white background
     mask_inv = cv2.bitwise_not(binary2)
@@ -435,17 +451,17 @@ def find_tip(binary1, cX, cY):
     ----------
     binary1 : array
         binary image array
-        
     cX : int
         x coordinate of eye
-        
     cY : int
         y coordinate of eye
-        
 
     Returns
     -------
     coordinates of tail tip and distance between eye and tip as list.
+        
+
+    
     """
     # define contours
     contours, hierarchy = cv2.findContours(copy.deepcopy(binary1), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
@@ -493,26 +509,23 @@ def find_base(binary2, far_x, far_y, cX, cY, daphnia_Length_eye_tip):
     ----------
     binary2 : array
         binary image array
-        
     far_x : int
         x coordinate of tail tip
-        
     far_y : inst
         x coordinate of tail tip
-        
     cX : int
         x coordinate of eye
-        
     cY : inst
         y coordinate of eye
-        
     daphnia_Length_eye_tip : float
         distance between eye and tail tip
-        
 
     Returns
     -------
     list
+        
+
+    
     """
     # get contour of eroded mask
     contours, hierarchy = cv2.findContours(copy.deepcopy(binary2), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
@@ -562,23 +575,21 @@ def plt_tail(img, far_x, far_y, base_x, base_y):
     ----------
     img : array
         image array
-        
     far_x : int
         x coordinate of tail tip
-        
     far_y : int
         y coordinate of tail tip
-        
     base_x : int
         x coordinate of tail base
-        
     base_y : int
         y coordinate of tail base
-        
 
     Returns
     -------
     image array with tail tip highlighted
+        
+
+    
     """
     # plot tail on image
     cv2.line(img, (far_x,far_y),(base_x, base_y), (255, 0, 0), 2)
@@ -594,23 +605,21 @@ def plt_length(img, cX, cY, base_x, base_y):
     ----------
     img : array
         image array
-        
     cX : int
         x coordinate of eye
-        
     cY : int
         y coordinate of eye
-        
     base_x : int
         x coordinate of tail base
-        
     base_y : int
         y coordinate of tail base
-        
 
     Returns
     -------
     image array with daphnia length highlighted
+        
+
+    
     """
     # plot daphnia Length on image (from eye to base)
     cv2.line(img, (cX, cY), (base_x, base_y), (0, 0, 255), 2)
