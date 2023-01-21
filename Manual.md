@@ -1,6 +1,6 @@
 # The-Daphnia-ruler manual
 ## Contents
-1. Introduction\
+1. [Introduction](#1.-Introduction)\
 	1a. Measured traits
 2. Usage\
 	2a. The help menu\
