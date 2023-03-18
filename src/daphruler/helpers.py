@@ -19,14 +19,24 @@ import pandas as pd
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 import argparse
-from pathlib import Path
 
 # define measurement approach by implementing different exceptions
 def measure_except_eye(path):
-    '''
-    This method deals with the appropriate exceptions that need to be
+    """This method deals with the appropriate exceptions that need to be
     handled when measuring several daphnia
-    '''
+
+    Parameters
+    ----------
+    path : str
+        path to image
+
+    Returns
+    -------
+    List of measurements and image with results plotted
+        
+
+    
+    """
     try:
         res = measurement_methods.eye_method_2(path)
         return(res)
@@ -52,10 +62,21 @@ def measure_except_eye(path):
     
 # define measurement approach by implementing different exceptions
 def measure_except(path):
-    '''
-    This method deals with the appropriate exceptions that need to be
+    """This method deals with the appropriate exceptions that need to be
     handled when measuring several daphnia
-    '''
+
+    Parameters
+    ----------
+    path : str
+        path to image
+
+    Returns
+    -------
+    List of measurements and image with results plotted
+        
+
+    
+    """
     try:
         res2 = measurement_methods.head_method(path)
         return(res2)
@@ -64,10 +85,21 @@ def measure_except(path):
         pass
 # define argparse function to check whether input directory is valid
 def is_dir(path):
-    '''
-    This function checks whether a path is a directory. If so it returns the path to this
+    """This function checks whether a path is a directory. If so it returns the path to this
     directory
-    '''
+
+    Parameters
+    ----------
+    path : str
+        path to check if it's a directory
+
+    Returns
+    -------
+    path if check has passed. Otherwise an error is raised
+        
+
+    
+    """
     if not os.path.isdir(path):
         raise argparse.ArgumentTypeError('input directory: %s is not a valid path' % path)
     else:
@@ -75,10 +107,21 @@ def is_dir(path):
 
 # define function that checks directories for images and scaling files
 def check_scale(path):
-    '''
-    This functions checks the directory tree for the presence and correctness of scaling files in image directories.
+    """This functions checks the directory tree for the presence and correctness of scaling files in image directories.
     If missing the user is asked if he wants to continue.
-    '''
+
+    Parameters
+    ----------
+    path : str
+        Path to directory or parent directory where scale.txt file should be.
+
+    Returns
+    -------
+    nothing
+        
+
+    
+    """
     # set counter for missing scaling files
     missing_dir = []
     # set list for wrong scaling files
@@ -177,10 +220,27 @@ def check_scale(path):
 
 # define function that scales results to mm
 def scale_measurements(res, img_dir, sc_factor, args):
-    '''
-    This function uses the scaling factor from Scale.txt to convert 
+    """This function uses the scaling factor from Scale.txt to convert
     measurements from pixels to mm.
-    '''
+
+    Parameters
+    ----------
+    res : list
+        list with original measurements without scaling
+    img_dir : str
+        path to image directory
+    sc_factor : float
+        scaling factor
+    args : arguments from cli
+        
+
+    Returns
+    -------
+    List with measurements scaled to mm
+        
+
+    
+    """
     # scale measurements
     for inst in res:
         # if eye method is activate scale all variables
@@ -214,9 +274,27 @@ def scale_measurements(res, img_dir, sc_factor, args):
 
 # define function that creates a datframe based on result dictionaries
 def create_df(res, img_dir, args, scaling=None):
-    '''
-    This function creates a dataframe based on the multiprocessing output (list of dictionaries).
-    '''
+    """This function creates a dataframe based on the multiprocessing output (list of dictionaries).
+
+    Parameters
+    ----------
+    res : list
+        List with measurement results
+    img_dir : str
+        path to image directory
+    args : args from cli
+        
+    scaling : float
+        Scaling factor
+        (Default value = None)
+
+    Returns
+    -------
+    Dataframe with measurement results
+        
+
+    
+    """
     # define scale
     scale = scaling
     # if scaling is activated. overwrite results with scaled measurements
@@ -261,27 +339,41 @@ def create_df(res, img_dir, args, scaling=None):
 
 #define a function that analyses a directory
 def process_directory(d, args):
-    '''
-    This functionen measured all images in a directory if it is not an output directory
-    '''
+    """This functionen measured all images in a directory if it is not an output directory
+
+    Parameters
+    ----------
+    d : str
+        path to directory
+    args : args from cli
+        
+
+    Returns
+    -------
+    nothing
+        
+
+    
+    """
     if not d.endswith('results'):
         # create list of image files
         files = os.listdir(d)
 
-        #filter files for images
+        # filter files for images
         filtered_files = []
         for k in files:
-            file_path = os.path.join(d,k)
-            if  os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
+            file_path = os.path.join(d, k)
+            if os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
                 filtered_files.append(file_path)
             else:
                 pass
         # if scaling is active check if Scale.txt is in directory. if not exit
         if len(filtered_files)>0 and args.scaleMM:
             if 'Scale.txt' not in files:
-                print('You did not provide a scaling file in directory: %s ... skipping directory!' % d)
+                print(
+                    'You did not provide a scaling file in directory: %s ... skipping directory!' % d
+                )
                 return
-
             else:
                 json_file = open(os.path.join(d, 'Scale.txt'), 'r', encoding ='utf-8')
 
@@ -289,7 +381,7 @@ def process_directory(d, args):
                 json_file.close()
                 sc_factor = Scale['PixelperMM']
 
-                #check if Scaling.txt provides a number
+                # check if Scaling.txt provides a number
                 if not isinstance(sc_factor, (int, float)):
                     print('%s/Scaling.txt did not provide a number... skipping' % d)
                     return
@@ -304,10 +396,9 @@ def process_directory(d, args):
             print('\n Processing ' + d)
 
             # make directory for results
-            if not os.path.exists(os.path.join(d,'results')):
-                os.makedirs(os.path.join(d,'results'))
-            destination = os.path.join(d,'results')
-
+            if not os.path.exists(os.path.join(d, 'results')):
+                os.makedirs(os.path.join(d, 'results'))
+            destination = os.path.join(d, 'results')
 
             # Create a pool of workers (multiprocessing)
             p = Pool(processes = cpu_count() - 1)
@@ -348,3 +439,27 @@ def process_directory(d, args):
                     cv2.imwrite(os.path.join(destination, ID), di['image'])
             # print total elapsed time for directory d
             print('total elapsed time (s): ' + str(time.time()-start))
+
+def process_recursive(source, args):
+    """Process input directory and children
+
+    Parameters
+    ----------
+    source : str
+        source directory
+        
+    args : args from argparser
+        
+
+    Returns
+    -------
+    nothing
+    """
+    #if source directory contains images, prcess them
+    process_directory(source, args = args)
+
+    # loop through subdirectories and process the appropriate ones
+    for root, dirs, filenames in os.walk(source):
+        for d in dirs:
+            directory_in = os.path.join(root,d)
+            process_directory(directory_in, args = args)

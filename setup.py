@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="daphruler",
-    version="0.3.3",
+    version="0.3.4",
     author="Nelson Stevens",
     author_email="nelson.stevens92@gmail.com",
     description="Automate collecting morphometric traits of zooplankton.",
@@ -21,7 +21,7 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-    install_requires = [
+    install_requires=[
         "astroid==2.3.3",
         "attrs==21.2.0",
         "cycler==0.10.0",

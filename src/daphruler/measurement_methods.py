@@ -5,26 +5,22 @@ Created on Fri May  3 14:21:59 2019
 @author: Nelson
 """
 # import libraries
-import os
 import cv2
-import numpy as np
 import sys
-from math import pi
-from skimage import morphology, measure
-from skimage.filters import scharr
-from scipy import ndimage
-import math
-import copy
-import warnings
 from daphruler import utils
-import json
 # create function that does not require landmarks
 def head_method(image):
-    ''' This method calculates the Length of the major axis of a fitted ellipse
+    """This method calculates the Length of the major axis of a fitted ellipse
     around the binary mask of the daphnia
-    input:
-        image source
-    output: dictionary with 8 values:
+
+    Parameters
+    ----------
+    image : str
+        path to image source
+
+    Returns
+    -------
+    dictionary with 8 values : 
         output['ID'] : ID of the image
         output['perimeter'] = perimeter os binary mask
         output['area'] = area of binary mask
@@ -32,7 +28,10 @@ def head_method(image):
         output['solidity'] = ratio of the area of the binary mask
         and the area of the convex hull
         output['full.Length'] = major axis length of the fitted elipse
-        output['image'] = imgage with plotted size estimate'''
+        output['image'] = imgage with plotted size estimate
+
+    
+    """
 
     # import and resize
     img_res = utils.import_image(image)
@@ -78,12 +77,18 @@ def head_method(image):
 # define function that uses landmarks to calculate body size
 # also discard background while detecting eye
 def eye_method_2(image):
-    ''' This method uses the eye of the daphnia as a landmark
+    """This method uses the eye of the daphnia as a landmark
     and calculates the distance to the base of the tail, the length of the tail,
     and the angle between the tail and the body
-    input:
-        image source
-    output: dictionary with 8 values:
+
+    Parameters
+    ----------
+    image : str
+        path to image source
+
+    Returns
+    -------
+    dictionary with 8 values : 
         output['ID'] : ID of the image
         output['eye.length'] = Length from eye to base of tail
         output['perimeter'] = perimeter os binary mask
@@ -95,7 +100,10 @@ def eye_method_2(image):
         output['tail.Length'] = the length of the tail_length
         output['tail.angle'] = the angle between the tail and the line between
         eye and the base of the tail
-        output['image'] = imgage with plotted size estimate'''
+        output['image'] = imgage with plotted size estimate
+
+    
+    """
 
     # import and resize
     img_res = utils.import_image(image)
