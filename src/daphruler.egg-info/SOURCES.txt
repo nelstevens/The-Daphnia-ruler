@@ -11,3 +11,7 @@ src/daphruler.egg-info/SOURCES.txt
 src/daphruler.egg-info/dependency_links.txt
 src/daphruler.egg-info/requires.txt
 src/daphruler.egg-info/top_level.txt
+tests/test_daphnia_ruler.py
+tests/test_helpers.py
+tests/test_measurement_methods.py
+tests/test_utils.py
