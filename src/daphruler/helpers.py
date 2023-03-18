@@ -359,20 +359,21 @@ def process_directory(d, args):
         # create list of image files
         files = os.listdir(d)
 
-        #filter files for images
+        # filter files for images
         filtered_files = []
         for k in files:
-            file_path = os.path.join(d,k)
-            if  os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
+            file_path = os.path.join(d, k)
+            if os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
                 filtered_files.append(file_path)
             else:
                 pass
         # if scaling is active check if Scale.txt is in directory. if not exit
         if len(filtered_files)>0 and args.scaleMM:
             if 'Scale.txt' not in files:
-                print('You did not provide a scaling file in directory: %s ... skipping directory!' % d)
+                print(
+                    'You did not provide a scaling file in directory: %s ... skipping directory!' % d
+                )
                 return
-
             else:
                 json_file = open(os.path.join(d, 'Scale.txt'), 'r', encoding ='utf-8')
 
@@ -380,7 +381,7 @@ def process_directory(d, args):
                 json_file.close()
                 sc_factor = Scale['PixelperMM']
 
-                #check if Scaling.txt provides a number
+                # check if Scaling.txt provides a number
                 if not isinstance(sc_factor, (int, float)):
                     print('%s/Scaling.txt did not provide a number... skipping' % d)
                     return
@@ -395,10 +396,9 @@ def process_directory(d, args):
             print('\n Processing ' + d)
 
             # make directory for results
-            if not os.path.exists(os.path.join(d,'results')):
-                os.makedirs(os.path.join(d,'results'))
-            destination = os.path.join(d,'results')
-
+            if not os.path.exists(os.path.join(d, 'results')):
+                os.makedirs(os.path.join(d, 'results'))
+            destination = os.path.join(d, 'results')
 
             # Create a pool of workers (multiprocessing)
             p = Pool(processes = cpu_count() - 1)

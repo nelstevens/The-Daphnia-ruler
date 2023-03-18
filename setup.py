@@ -21,7 +21,7 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-    install_requires = [
+    install_requires=[
         "astroid==2.3.3",
         "attrs==21.2.0",
         "cycler==0.10.0",
