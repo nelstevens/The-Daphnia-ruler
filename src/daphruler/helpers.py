@@ -428,7 +428,7 @@ def process_directory(d, args):
                 )
 
             # write data frame to csv
-            df.to_csv(os.path.join(destination,'measurement_results.')+str(os.path.basename(d))+'.csv', index = False)
+            df.to_csv(os.path.join(destination,'measurement_results_')+str(os.path.basename(d))+'.csv', index = False)
 
             # if no -n flag is set write images with measurement overplotted
             if not args.noImages:
