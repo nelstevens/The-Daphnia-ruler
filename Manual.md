@@ -1,15 +1,15 @@
 # The-Daphnia-ruler manual
 ## Contents
-1. Introduction\
-	1a. Measured traits
-2. Usage\
-	2a. The help menu\
-	2b. directory input\
-	2c. The Eye method\
-	2d. Don't write images with measurements\
-	2e. Scale measurements from pixel to another unit of length
-3. Output
-4. Supported operating systems
+1. [Introduction](#1-introduction)\
+	1a. [Measured traits](#1a-measured-traits)
+2. [Usage](#2-usage-and-arguments)\
+	2a. [The help menu](#2a-the-help-menu)\
+	2b. [directory input](#2b-directory-input)\
+	2c. [The Eye method](#2c-the-eye-method)\
+	2d. [Don't write images with measurements](#2d-dont-write-images-with-measurements)\
+	2e. [Scale measurements from pixel to another unit of length](#2e-scale-measurements-from-pixel-to-another-unit-of-length)
+3. [Output](#3-output)
+4. [Supported operating systems](#4-supported-operating-systems)
 
 ## 1. Introduction
 The Daphnia ruler is a command line program that allows the collection of 
