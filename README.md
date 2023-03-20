@@ -22,15 +22,15 @@ The Daphnia ruler can also be used as a python package allowing the user to acce
 
 ## Installation
 The fastest way to get your system setup is to make sure you've installed [python 3](https://www.python.org/) and the package installer [pip](https://pypi.org/project/pip/). Then run:\
-'''
+```
 python3 -m pip install -i https://test.pypi.org/simple/ daphruler
-'''
+```
 
 ## Usage
 For detailed information on how to use the Daphnia ruler see Manual.md. For quick helo on CLI usage run:
-'''
+```
 python3 -m daphruler.daphnia_ruler -h
-'''
+```
 
 ```bash
 usage: python daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
