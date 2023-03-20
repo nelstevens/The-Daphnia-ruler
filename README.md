@@ -17,25 +17,21 @@ The Daphnia ruler works in windows, macOS and linux and can measure the followin
 * body perimeter (length of red outline in image)
 * body width (purple line in image)
 
+The Daphnia ruler can also be used as a python package allowing the user to access more functionality. For more information see ...???!!!
+
 
 ## Installation
-The fastest way to get your system setup is to make sure you've installed python 3 (https://www.python.org/) and clone this repository to your local drive.
-Once complete use the package manager pip to install the necessary dependencies:
-1. Open your command prompt and navigate to the cloned directory
-2. Run this command: 
-```bash
-pip install -r requirements.txt
-```
-Users who wish to install dependencies manually run:
-```bash
-pip install opencv-python
-pip install scikit-image
-pip install pandas
-pip install tqdm
-```
+The fastest way to get your system setup is to make sure you've installed [python 3](https://www.python.org/) and the package installer [pip](https://pypi.org/project/pip/). Then run:\
+'''
+python3 -m pip install -i https://test.pypi.org/simple/ daphruler
+'''
+
 ## Usage
-For detailed information on how to use the Daphnia ruler see Manual.md.
-~~~
+For detailed information on how to use the Daphnia ruler see Manual.md. For quick helo on CLI usage run:
+'''
+python3 -m daphruler.daphnia_ruler -h
+'''
+
 ```bash
 usage: python daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
 
@@ -48,7 +44,7 @@ optional arguments:
   -s, --scaleMM         Scale measurement to mm. For more information see
                         Manual.md.
 ```
-~~~
+
 ## Contributions
 Collaborators are always welcome. Feel free to write pull requests or contact nelson.stevens92@gmail.com for further information.
 
