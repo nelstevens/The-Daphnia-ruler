@@ -29,20 +29,20 @@ python3 -m pip install -i https://test.pypi.org/simple/ daphruler
 ## Usage
 For detailed information on how to use the Daphnia ruler see Manual.md. For quick helo on CLI usage run:
 ```
-python3 -m daphruler.daphnia_ruler -h
+python3 -m daphruler -h
 ```
 
 ```bash
-usage: python daphnia_ruler.py [-h] [-p PATH] [-n] [-e] [-s]
+usage: python3 -m daphruler [-h] -p PATH [-n] [-e] [-s]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -p PATH, --path PATH  Path to your input directory. The program is able to
-                        loop through subdirectories of the input.
   -n, --noImages        Don't write images with results overplotted.
   -e, --eyeMethod       Implement eye method on top of ellipse method.
-  -s, --scaleMM         Scale measurement to mm. For more information see
-                        Manual.md.
+  -s, --scaleMM         Scale measurement to mm. For more information see README.md
+
+required named arguments:
+  -p PATH, --path PATH  Path to your input directory. The program is able to loop through subdirectories of the input.
 ```
 
 ## Contributions
