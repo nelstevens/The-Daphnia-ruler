@@ -95,6 +95,3 @@ def main():
     # process source directory and children
     helpers.process_recursive(source, args)
 
-if __name__ == '__main__':
-    # run main
-    main()
