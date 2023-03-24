@@ -26,8 +26,8 @@ def parse_args(args):
     
     """
     # use argparse to create optional arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--path', help='Path to your input directory. The program is able to loop through subdirectories of the input.', type=helpers.is_dir)
+    parser = argparse.ArgumentParser(prog = "python3 -m daphruler")
+    parser.add_argument('-p', '--path', help='Path to your input directory. The program is able to loop through subdirectories of the input.', type=helpers.is_dir, required = True)
     parser.add_argument('-n', '--noImages', help="Don't write images with results overplotted.", action='store_true')
     parser.add_argument('-e', '--eyeMethod', help="Implement eye method on top of ellipse method.", action='store_true')
     parser.add_argument('-s', '--scaleMM', help="Scale measurement to mm. For more information see README.md", action='store_true')
