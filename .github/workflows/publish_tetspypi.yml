@@ -2,8 +2,8 @@ name: publish testPyPi
 
 on:
   push:
-    branches:
-    - f-packaged
+    tags:
+    - v*
 jobs:
   build-and-publish-test:
     name: build and publish to test PyPi
