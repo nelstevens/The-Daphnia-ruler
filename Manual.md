@@ -41,15 +41,12 @@ Only one argument is mandatory which specifies the path to an input
 directory (see 2b. Input). All other arguments are optional, can be combined as desired and will be
 described in detail in the corresponding subsections. 
 
-To use the daphnia ruler first install it and its dependencies
-(instructions can be found in README.md). Once installed open your
-command prompt and navigate into the cloned directory. Note that the
-daphnia ruler only works when the working directory contains the following
-files:
-* daphnia_ruler.py
-* measurement_methods.py
-* helpers.py
-* utils.py
+To use the daphnia ruler simply install it (instructions can be found in README.md). 
+The daphnia ruler can then be used from the command line as a library module using the -m flag. 
+The name of the module is 'daphruler':\
+```
+python3 -m daphruler
+```
 
 ### 2a. The help menu
 The help menu very briefly describes the usage of the daphnia ruler and
