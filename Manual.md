@@ -56,7 +56,7 @@ The help menu very briefly describes the usage of the daphnia ruler and
 can be accessed using the -h flag. Your input should look like
 this:
 ```bash
-python daphnia_ruler.py -h
+python3 -m daphruler -h
 ```
 This command will show all possible arguments the daphnia ruler accepts
 plus a short description of each argument.
@@ -66,11 +66,11 @@ The input path is specified using the -p flag.
 Example:\
 Windows:
 ```powershell
-python daphnia_ruler.py -p C:\Users\'Username'\input_directory
+python3 -m daphruler -p C:\Users\'Username'\input_directory
 ```
 MacOS and Linux:
 ```bash
-python daphnia_ruler.py -p ~/zooplankton_project/input_directory
+python3 -m daphruler -p ~/zooplankton_project/input_directory
 ```
 This command specified 'input_directory' as the input for the daphnia ruler.
 
@@ -108,11 +108,11 @@ the length of the tail and the angle between the tail (blue line in image) and t
 Your input should look like this:\
 Windows:
 ```powershell
-python daphnia_ruler.py -e -p C:\Users\'Username'\input_directory
+python3 -m daphruler -e -p C:\Users\'Username'\input_directory
 ```
 MacOS and Linux:
 ```bash
-python daphnia_ruler.py -e -p ~/zooplankton_project/input_directory
+python3 -m daphruler -e -p ~/zooplankton_project/input_directory
 ```
 The eye method can be very usefull in measuring daphnia by potentially improving measurement accuracy since this method relies less on acurate masking of the daphnia body.
 However it is only usefull in measuring daphnia with visible eyes. For all other zooplankton species this method is not of use.
@@ -122,11 +122,11 @@ Using the -n flag disables the writing of images with measurements overploted. H
 Writing images to disk can be disabled with the following code:\
 Windows:
 ```powershell
-python daphnia_ruler.py -n -p C:\Users\'Username'\input_directory
+python3 -m daphruler -n -p C:\Users\'Username'\input_directory
 ```
 MacOS and Linux:
 ```bash
-python daphnia_ruler.py -n -p ~/zooplankton_project/input_directory
+python3 -m daphruler -n -p ~/zooplankton_project/input_directory
 ```
 ### 2e. Scale measurements from pixel to another unit of length
 The -s flag enables scaling of measurements. Note that this requires a file called Scale.txt in each directory containing images.\
@@ -134,11 +134,11 @@ A template for this file can be found in the github repository Github.com/nelste
 The following code enables scaling:\
 Windows:
 ```powershell
-python daphnia_ruler.py -s -p C:\Users\'Username'\input_directory
+python3 -m daphruler -s -p C:\Users\'Username'\input_directory
 ```
 MacOS and Linux:
 ```bash
-python daphnia_ruler.py -s -p ~/zooplankton_project/input_directory
+python3 -m daphruler -s -p ~/zooplankton_project/input_directory
 ```
 
 ## 3. Output
