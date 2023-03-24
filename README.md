@@ -17,7 +17,7 @@ The Daphnia ruler works in windows, macOS and linux and can measure the followin
 * body perimeter (length of red outline in image)
 * body width (purple line in image)
 
-The Daphnia ruler can also be used as a python package allowing the user to access more functionality. For more information see ...???!!!
+The Daphnia ruler can also be used as a python package allowing the user to access more functionality. For more information see tbd.
 
 
 ## Installation
@@ -27,7 +27,7 @@ python3 -m pip install -i https://test.pypi.org/simple/ daphruler
 ```
 
 ## Usage
-For detailed information on how to use the Daphnia ruler see Manual.md. For quick helo on CLI usage run:
+For detailed information on how to use the Daphnia ruler see Manual.md. For quick help on CLI usage run:
 ```
 python3 -m daphruler -h
 ```
