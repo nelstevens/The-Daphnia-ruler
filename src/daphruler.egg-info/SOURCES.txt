@@ -2,6 +2,7 @@ README.md
 pyproject.toml
 setup.py
 src/daphruler/__init__.py
+src/daphruler/__main__.py
 src/daphruler/daphnia_ruler.py
 src/daphruler/helpers.py
 src/daphruler/measurement_methods.py
