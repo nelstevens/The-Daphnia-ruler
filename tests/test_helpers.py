@@ -1,8 +1,9 @@
+import sys
+sys.path.append("src")
 import daphruler.helpers as helpers
 import pytest
 import os
 import numpy as np
-import sys
 import daphruler.daphnia_ruler as dr
 import pandas as pd
 

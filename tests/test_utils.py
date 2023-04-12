@@ -1,3 +1,5 @@
+import sys
+sys.path.append("src")
 import os
 import daphruler.utils as utils
 import numpy as np

@@ -1,5 +1,6 @@
 # test daphnia ruler
 import sys
+sys.path.append("src")
 import daphruler.daphnia_ruler as dr
 import os
 import pytest
