@@ -3,8 +3,4 @@ requires = [
     "setuptools>=42",
     "wheel"
 ]
-[tool.pytest.ini_options]
-pythonpath = [
-  "src"
-]
 build-backend = "setuptools.build_meta"
