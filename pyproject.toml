@@ -7,10 +7,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "daphruler"
 authors = [
-    {name: "Nelson stevens", email = "nelson.stevens92@gmail.com"}
+    {name = "Nelson stevens", email = "nelson.stevens92@gmail.com"}
 ]
 maintainers = [
-    {name: "Nelson Stevens", email = "nelson.stevens92@gmail.com"}
+    {name = "Nelson Stevens", email = "nelson.stevens92@gmail.com"}
 ]
 description = "Automate collecting morphometric traits of zooplankton."
 readme = "README.md"
