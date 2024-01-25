@@ -6,6 +6,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 [project]
 name = "daphruler"
+version = "0.4.1"
 authors = [
     {name = "Nelson stevens", email = "nelson.stevens92@gmail.com"}
 ]
