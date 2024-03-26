@@ -1,6 +1,7 @@
 # test daphnia ruler
 import sys
-import daphnia_ruler as dr
+sys.path.append("src")
+import daphruler.daphnia_ruler as dr
 import os
 import pytest
 # create directory paths
@@ -114,6 +115,78 @@ def test_main_eye_no(monkeypatch, dirs):
         # assert no error
         try:
             dr.main()
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=False, noImages=False, scaleMM=False)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with eye_method
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_eye(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=True, noImages=False, scaleMM=False)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with no Images
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_no(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=False, noImages=True, scaleMM=False)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with scaling
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_scale(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=False, noImages=False, scaleMM=True)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with eye_method and no Images
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_eye_no(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=True, noImages=True, scaleMM=False)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with eye method and scaling
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_eye_scale(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=True, noImages=False, scaleMM=True)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with no images and scaling
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_no_scale(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=False, noImages=True, scaleMM=True)
+            assert True
+        except Exception:
+            assert False
+# test daphnia_ruler with eye method, no images and scaling
+@pytest.mark.parametrize("dirs", pths)
+def test_daphnia_ruler_eye_no_scale(dirs):
+    # assert no error
+        try:
+            dr.daphniaruler(path = dirs, eyeMethod=True, noImages=True, scaleMM=True)
             assert True
         except Exception:
             assert False
