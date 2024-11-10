@@ -14,7 +14,7 @@ import json
 import cv2
 import sys
 from daphruler import measurement_methods
-import imghdr
+import filetype
 import pandas as pd
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
@@ -131,7 +131,7 @@ def check_scale(path):
     filtered_files = []
     for f in files:
         file_path = os.path.join(path,f)
-        if os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
+        if os.path.isfile(file_path) and filetype.image_match(file_path) is not None and '_processed' not in file_path:
             filtered_files.append(file_path)
         else:
             pass
@@ -161,7 +161,7 @@ def check_scale(path):
             filtered_files = []
             for f in files:
                 file_path = os.path.join(dir_path,f)
-                if  os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
+                if  os.path.isfile(file_path) and filetype.image_match(file_path) is not None and '_processed' not in file_path:
                     filtered_files.append(file_path)
                 else:
                     pass
@@ -363,7 +363,7 @@ def process_directory(d, args):
         filtered_files = []
         for k in files:
             file_path = os.path.join(d, k)
-            if os.path.isfile(file_path) and imghdr.what(file_path) is not None and '_processed' not in file_path:
+            if os.path.isfile(file_path) and filetype.image_match(file_path) is not None and '_processed' not in file_path:
                 filtered_files.append(file_path)
             else:
                 pass
