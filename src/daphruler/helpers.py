@@ -271,8 +271,6 @@ def scale_measurements(res, img_dir, sc_factor, args):
                     pass
 
     return(res)
-
-# define function that creates a datframe based on result dictionaries
 def create_df(res, img_dir, args, scaling=None):
     """This function creates a dataframe based on the multiprocessing output (list of dictionaries).
 
@@ -291,50 +289,39 @@ def create_df(res, img_dir, args, scaling=None):
     Returns
     -------
     Dataframe with measurement results
-        
-
-    
     """
-    # define scale
+      # define scale
     scale = scaling
+    # remove image to save time
+    res = [{k: v for k, v in d.items() if k != "image"} for d in res]
     # if scaling is activated. overwrite results with scaled measurements
     if args.scaleMM:
         res = scale_measurements(res, img_dir, scale, args)
-
-
-    # if eye method is activated provide column for it
+    # define column defs
     if args.eyeMethod:
-            df = pd.DataFrame(columns = ['ID', 'body.Length.h','body.Length.e', 'tail.Length',
-            'body.Perimeter', 'body.Area', 'body.Width', 'solidity', 'tail.Angle'])
-            # loop through results and append to dataframe
-            for di in tqdm(res):
-                try:
-                    df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
-                    'body.Length.e': di['eye.Length'],
-                    'tail.Length': di['tail.Length'], 'body.Perimeter': di['perimeter'],
-                    'body.Area': di['area'], 'body.Width': di['minor'],
-                    'solidity': di['solidity'], 'tail.Angle': di['tail.angle']}, ignore_index=True)
-                # if Landmark method failed
-                except KeyError:
-                        df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
-                        'body.Perimeter': di['perimeter'],
-                        'body.Area': di['area'], 'body.Width': di['minor'],
-                        'solidity': di['solidity']}, ignore_index=True).fillna('NA')
-                # if everything failed
-                except TypeError:
-                    pass
+        nam_mp = {
+            'ID': "ID",
+            'full.Length': "body.Length.h",
+            'eye.Length': "body.Length.e",
+            'tail.Length': "tail.Length",
+            'perimeter': "body.Perimeter",
+            'area': "body.Area",
+            'minor': "body.Width",
+            'solidity': "solidity",
+            'tail.angle': "tail.Angle"
+        }
     else:
-        df = pd.DataFrame(columns = ['ID', 'body.Length.h', 'body.Perimeter',
-        'body.Area', 'body.Width', 'solidity'])
-        for di in tqdm(res):
-                try:
-                        df = df.append({'ID': di['ID'], 'body.Length.h': di['full.Length'],
-                        'body.Perimeter': di['perimeter'],
-                        'body.Area': di['area'], 'body.Width': di['minor'],
-                        'solidity': di['solidity']}, ignore_index=True).fillna('NA')
-                # if everything failed
-                except TypeError:
-                    pass
+        nam_mp = {
+            'ID': "ID",
+            'full.Length': "body.Length.h",
+            'perimeter': "body.Perimeter",
+            'area': "body.Area",
+            'minor': "body.Width",
+            'solidity': "solidity"
+        }
+    df = pd.DataFrame.from_records(res).rename(columns=nam_mp).fillna("NA")
+    # reorder columns
+    df = df[list(nam_mp.values())]
     return(df)
 
 #define a function that analyses a directory
