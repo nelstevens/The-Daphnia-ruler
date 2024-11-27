@@ -8,12 +8,15 @@ jobs:
   build-and-publish-test:
     name: build and publish to test PyPi
     runs-on: ubuntu-22.04
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/daphruler
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
     - name: setup python 3.11
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.11
+        python-version: '3.11'
     - name: install pypa/build
       run: >-
         python -m
@@ -28,9 +31,8 @@ jobs:
         --wheel
         --outdir dist/
     - name: Publish distribution 📦 to Test PyPI
-      uses: pypa/gh-action-pypi-publish@master
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        password: ${{ secrets.TESTPYPI_TOKEN }}
         repository_url: https://test.pypi.org/legacy/
 
 
