@@ -75,7 +75,7 @@ dependencies = [
     "tifffile==2024.9.20",
     "toml==0.10.2",
     "tomlkit==0.13.2",
-    "tornado==6.4.1",
+    "tornado==6.4.2",
     "tqdm==4.67.0",
     "traitlets==5.14.3",
     "tzdata==2024.2",
