@@ -11,6 +11,8 @@ jobs:
     environment:
       name: testpypi
       url: https://test.pypi.org/p/daphruler
+    permissions:
+      id-token: write 
     steps:
     - uses: actions/checkout@v4
     - name: setup python 3.11
