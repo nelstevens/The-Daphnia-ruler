@@ -21,7 +21,7 @@ The Daphnia ruler can also be used as a python package allowing the user to acce
 
 
 ## Installation
-The fastest way to get your system setup is to make sure you've installed [python 3](https://www.python.org/)(Version 3.10 or newer) and the package installer [pip](https://pypi.org/project/pip/). Then run:
+The fastest way to get your system setup is to make sure you've installed [python 3](https://www.python.org/) (Version 3.10 or higher) and the package installer [pip](https://pypi.org/project/pip/). Then run:
 ```
 python3 -m pip install -i https://test.pypi.org/simple/ daphruler --extra-index-url https://pypi.org/simple/
 ```
